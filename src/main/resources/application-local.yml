@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.temp.use_jdbc_metadata_defaults: false
+      hibernate.jdbc.batch_size: 50
+      hibernate.type: trace
+      hibernate.use_sql_comments: true
+      hibernate.showsql: true      
+      hibernate.format_sql: true   
+
+      
