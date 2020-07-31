@@ -100,7 +100,7 @@ public class ClientPjeService {
     
     
     public void entregarManifestacaoProcessual() {
-    	teste();
+    	//teste();
     	
    	   	List<ManifestacaoProcessual> processos = repository.consultaRegistrosProcessar();
    	   	for (ManifestacaoProcessual processo : processos) {
