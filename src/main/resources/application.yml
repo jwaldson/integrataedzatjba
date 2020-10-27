@@ -1,8 +1,8 @@
 spring:
   datasource:
-    jdbcUrl: jdbc:postgresql://186.202.136.88:15480/metropolis
+    jdbcUrl:  jdbc:postgresql://186.202.136.88:5433/metropolis_tr_candeias
     username: postgres
-    password: metro
+    password: Edz@_Natabios@0802
 
   jpa:
     properties:
