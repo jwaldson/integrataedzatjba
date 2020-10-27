@@ -237,9 +237,6 @@ public class Processo implements Serializable {
 	@Column(name="sai_erro_sistema")
 	private String sai_erro_sistema;
 
-	@Column(name="processoid")
-	private Integer processoid;
-
 	public Processo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -333,7 +330,6 @@ public class Processo implements Serializable {
 		  this.sai_conteudo_retornado=sai_conteudo_retornado;
 		  this.sai_data_atualizacao_registro=sai_data_atualizacao_registro;
 		  this.sai_erro_sistema=sai_erro_sistema;
-		  this.processoid=processoid;
 	}
 
 	public Integer getId() {
@@ -918,14 +914,6 @@ public class Processo implements Serializable {
 
 	public void setSai_erro_sistema(String sai_erro_sistema) {
 		this.sai_erro_sistema = sai_erro_sistema;
-	}
-
-	public Integer getProcessoid() {
-		return processoid;
-	}
-
-	public void setProcessoid(Integer processoid) {
-		this.processoid = processoid;
 	}
 
 }
