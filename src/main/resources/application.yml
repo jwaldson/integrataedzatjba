@@ -6,6 +6,7 @@ spring:
 
   jpa:
     properties:
+      hibernate.default_schema: webservicetjb
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate.temp.use_jdbc_metadata_defaults: false
       hibernate.jdbc.batch_size: 50

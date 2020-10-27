@@ -25,7 +25,7 @@ public class Processo implements Serializable {
 	private String entra_status_processamento;
 
 	@Column(name="id_manifestante")
-	private String id_manifestante;
+	private Integer id_manifestante;
 
 	@Column(name="senha_manifestante")
 	private String senha_manifestante;
@@ -34,7 +34,7 @@ public class Processo implements Serializable {
 	private Integer classe_processual;
 
 	@Column(name="codigo_localidade")
-	private String codigo_localidade;
+	private Integer codigo_localidade;
 
 	@Column(name="competencia")
 	private Integer competencia;
@@ -82,7 +82,7 @@ public class Processo implements Serializable {
 	private String parte_data_obito;
 
 	@Column(name="parte_numero_documento_principal")
-	private String parte_numero_documento_principal;
+	private BigInteger parte_numero_documento_principal;
 
 	@Column(name="parte_tipo_pessoa")
 	private String parte_tipo_pessoa;
@@ -112,7 +112,7 @@ public class Processo implements Serializable {
 	private String parte_outro_nome;
 
 	@Column(name="endereco_cep")
-	private String endereco_cep;
+	private Integer endereco_cep;
 	
 	@Column(name="endereco_logradouro")
 	private String endereco_logradouro;
@@ -157,10 +157,10 @@ public class Processo implements Serializable {
 	private Integer assunto_processual_codigo_nacional;
 
 	@Column(name="assunto_processual_codigo_assunto")
-	private String assunto_processual_codigo_assunto;
+	private Integer assunto_processual_codigo_assunto;
 
 	@Column(name="assunto_processual_codigo_pai_acional")
-	private String assunto_processual_codigo_pai_acional;
+	private Integer assunto_processual_codigo_pai_acional;
 
 	@Column(name="assunto_processual_descricao")
 	private String assunto_processual_descricao;
@@ -220,7 +220,7 @@ public class Processo implements Serializable {
 	private String retorno_mensagem;
 
 	@Column(name="retorno_protocolo_recebimento")
-	private String retorno_protocolo_recebimento;
+	private BigInteger retorno_protocolo_recebimento;
 
 	@Column(name="retorno_data_operacao")
 	private String retorno_data_operacao;
@@ -245,19 +245,19 @@ public class Processo implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Processo(Integer id, String id_manifestante, String senha_manifestante, Integer classe_processual, String codigo_localidade,
+	public Processo(Integer id, Integer id_manifestante, String senha_manifestante, Integer classe_processual, Integer codigo_localidade,
 					Integer competencia, String modalidade_vinculacao_processo, String prioridade, Double valor_causa, Boolean assistencia_judiciaria, BigInteger nivel_sigilo,
 					String data_ajuizamento, String outro_parametro, String polo, String parte_nome, String parte_sexo, String parte_nome_genitor, String parte_nome_genitora,
-					String parte_data_nascimento, String parte_data_obito, String parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
+					String parte_data_nascimento, String parte_data_obito, BigInteger parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
 					String parte_estado_natural, String parte_nacionalidade, String parte_codigo_documento, String parte_emissor_documento, String parte_tipo_documento,
-					String parte_nome_detentora, String parte_outro_nome,String endereco_cep, String endereco_logradouro, String endereco_numero, String endereco_complemento,
+					String parte_nome_detentora, String parte_outro_nome,Integer endereco_cep, String endereco_logradouro, String endereco_numero, String endereco_complemento,
 					String endereco_bairro, String endereco_cidade, String endereco_estado, String endereco_pais, Boolean repres_processual_intimacao, String repres_processual_nome,
 					String repres_processual_inscricao, String repres_processual_numero_documento_principal, String repres_processual_tipo_representante, Boolean assunto_processual_principal,
-					Integer assunto_processual_codigo_nacional, String assunto_processual_codigo_assunto, String assunto_processual_codigo_pai_acional, String assunto_processual_descricao,
+					Integer assunto_processual_codigo_nacional, Integer assunto_processual_codigo_assunto, Integer assunto_processual_codigo_pai_acional, String assunto_processual_descricao,
 					String id_documento, String id_documento_vinculado, String tipo_documento_consultapje, String data_hora_documento, String descricao_documento, String hash_documento,
 					Integer nivel_sigilo_documento, String tipo_documento, String conteudo_documento, String mimetype_documento, String assinatura, String algoritmo_hash_assinatura,
 					String cadeia_certificado_assinatura, String codificacao_certificado_assinatura, String dataassinatura, String signatariologin, Boolean retorno_sucesso, 
-					String retorno_mensagem, String retorno_protocolo_recebimento, String retorno_data_operacao, String retorno_recibo, String sai_conteudo_retornado, 
+					String retorno_mensagem, BigInteger retorno_protocolo_recebimento, String retorno_data_operacao, String retorno_recibo, String sai_conteudo_retornado, 
 					String sai_data_atualizacao_registro, String sai_erro_sistema)
 
  {
@@ -352,11 +352,11 @@ public class Processo implements Serializable {
 		this.entra_status_processamento = entra_status_processamento;
 	}
 
-	public String getId_manifestante() {
+	public Integer getId_manifestante() {
 		return id_manifestante;
 	}
 
-	public void setId_manifestante(String id_manifestante) {
+	public void setId_manifestante(Integer id_manifestante) {
 		this.id_manifestante = id_manifestante;
 	}
 
@@ -376,11 +376,11 @@ public class Processo implements Serializable {
 		this.classe_processual = classe_processual;
 	}
 
-	public String getCodigo_localidade() {
+	public Integer getCodigo_localidade() {
 		return codigo_localidade;
 	}
 
-	public void setCodigo_localidade(String codigo_localidade) {
+	public void setCodigo_localidade(Integer codigo_localidade) {
 		this.codigo_localidade = codigo_localidade;
 	}
 
@@ -504,11 +504,11 @@ public class Processo implements Serializable {
 		this.parte_data_obito = parte_data_obito;
 	}
 
-	public String getParte_numero_documento_principal() {
+	public BigInteger getParte_numero_documento_principal() {
 		return parte_numero_documento_principal;
 	}
 
-	public void setParte_numero_documento_principal(String parte_numero_documento_principal) {
+	public void setParte_numero_documento_principal(BigInteger parte_numero_documento_principal) {
 		this.parte_numero_documento_principal = parte_numero_documento_principal;
 	}
 
@@ -584,11 +584,11 @@ public class Processo implements Serializable {
 		this.parte_outro_nome = parte_outro_nome;
 	}
 
-	public String getEndereco_cep() {
+	public Integer getEndereco_cep() {
 		return endereco_cep;
 	}
 
-	public void setEndereco_cep(String endereco_cep) {
+	public void setEndereco_cep(Integer endereco_cep) {
 		this.endereco_cep = endereco_cep;
 	}
 
@@ -704,19 +704,19 @@ public class Processo implements Serializable {
 		this.assunto_processual_codigo_nacional = assunto_processual_codigo_nacional;
 	}
 
-	public String getAssunto_processual_codigo_assunto() {
+	public Integer getAssunto_processual_codigo_assunto() {
 		return assunto_processual_codigo_assunto;
 	}
 
-	public void setAssunto_processual_codigo_assunto(String assunto_processual_codigo_assunto) {
+	public void setAssunto_processual_codigo_assunto(Integer assunto_processual_codigo_assunto) {
 		this.assunto_processual_codigo_assunto = assunto_processual_codigo_assunto;
 	}
 
-	public String getAssunto_processual_codigo_pai_acional() {
+	public Integer getAssunto_processual_codigo_pai_acional() {
 		return assunto_processual_codigo_pai_acional;
 	}
 
-	public void setAssunto_processual_codigo_pai_acional(String assunto_processual_codigo_pai_acional) {
+	public void setAssunto_processual_codigo_pai_acional(Integer assunto_processual_codigo_pai_acional) {
 		this.assunto_processual_codigo_pai_acional = assunto_processual_codigo_pai_acional;
 	}
 
@@ -872,11 +872,11 @@ public class Processo implements Serializable {
 		this.retorno_mensagem = retorno_mensagem;
 	}
 
-	public String getRetorno_protocolo_recebimento() {
+	public BigInteger getRetorno_protocolo_recebimento() {
 		return retorno_protocolo_recebimento;
 	}
 
-	public void setRetorno_protocolo_recebimento(String retorno_protocolo_recebimento) {
+	public void setRetorno_protocolo_recebimento(BigInteger retorno_protocolo_recebimento) {
 		this.retorno_protocolo_recebimento = retorno_protocolo_recebimento;
 	}
 

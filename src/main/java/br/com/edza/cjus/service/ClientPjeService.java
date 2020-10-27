@@ -2,6 +2,7 @@ package br.com.edza.cjus.service;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,9 @@ import java.util.TimeZone;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.cxf.helpers.IOUtils;
@@ -70,7 +74,7 @@ public class ClientPjeService {
    	   		try {
 	   	   		tienmap.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
 
-	   	   		tienmap.setIdManifestante(processo.getId_manifestante());
+	   	   		tienmap.setIdManifestante(processo.getId_manifestante().toString());
 //	   	   		String numeroProcesso = processo.getgetNumeroProcesso();
 
 //	   	   		tienmap.setNumeroProcesso(numeroProcesso);
@@ -83,8 +87,8 @@ public class ClientPjeService {
 	    		TipoCabecalhoProcesso tdb = new TipoCabecalhoProcesso();
 	    		Integer classeProcessual = processo.getClasse_processual();
 				tdb.setClasseProcessual(classeProcessual!=null?classeProcessual:null);
-	    		String codigoLocalidade = processo.getCodigo_localidade();
-				tdb.setCodigoLocalidade(codigoLocalidade!=null?codigoLocalidade:null);
+	    		Integer codigoLocalidade = processo.getCodigo_localidade();
+				tdb.setCodigoLocalidade(codigoLocalidade!=null?codigoLocalidade.toString():null);
 	    		Double valorCausa = processo.getValor_causa();
 				tdb.setValorCausa(valorCausa!=null?valorCausa:null);
    	   		
@@ -150,7 +154,7 @@ public class ClientPjeService {
    				String numeroDocumentoPrincipal = processo.getRepres_processual_numero_documento_principal();
 				adv.setNumeroDocumentoPrincipal(numeroDocumentoPrincipal!=null?numeroDocumentoPrincipal:null);
    				String tipoRepresentante = processo.getRepres_processual_tipo_representante();
-   				if (tipoRepresentante!=null) {
+   				if (tipoRepresentante!=null && tipoRepresentante.length()>0 ) {
    					ModalidadeRepresentanteProcessual fromValue = ModalidadeRepresentanteProcessual.fromValue(tipoRepresentante);
    					adv.setTipoRepresentante(fromValue);
    				}
@@ -188,8 +192,8 @@ public class ClientPjeService {
 				tpa.setNacionalidade(nacionalidade!=null?nacionalidade:null);
 				String nomeParte = processo.getParte_nome();
 				tpa.setNome(nomeParte!=null?nomeParte:null);
-				String numeroDocumentoPrincipalParte = processo.getParte_numero_documento_principal();
-				tpa.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParte!=null?numeroDocumentoPrincipalParte:null);
+				BigInteger numeroDocumentoPrincipalParte = processo.getParte_numero_documento_principal();
+				tpa.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParte!=null?String.valueOf(numeroDocumentoPrincipalParte):null);
 				//   	    	    				tpa.setPessoaVinculada(pessoaParte.get);
 				if (processo.getParte_sexo()!=null) {
 					ModalidadeGeneroPessoa fromValue = ModalidadeGeneroPessoa.fromValue(processo.getParte_sexo());
@@ -202,8 +206,8 @@ public class ClientPjeService {
 				TipoEndereco endPessoaParte = new TipoEndereco(); 
 				String bairro = processo.getEndereco_bairro();
 				endPessoaParte.setBairro(bairro!=null?bairro:null);
-				String cep = processo.getEndereco_cep();
-				endPessoaParte.setCep(cep!=null?cep:null);
+				Integer cep = processo.getEndereco_cep();
+				endPessoaParte.setCep(cep!=null?cep.toString():null);
 				String cidade = processo.getEndereco_cidade();
 				endPessoaParte.setCidade(cidade!=null?cidade:null);
 				String complemento = processo.getEndereco_complemento();
@@ -224,7 +228,7 @@ public class ClientPjeService {
 				String emissorDocumento = processo.getParte_emissor_documento();
 				tdoci.setEmissorDocumento(emissorDocumento!=null?emissorDocumento:null);
 				tdoci.setNome(nomeParte);
-				if (processo.getParte_tipo_documento() != null) {
+				if (processo.getParte_tipo_documento() != null && processo.getParte_tipo_documento().length()>0) {
 					tdoci.setTipoDocumento(ModalidadeDocumentoIdentificador.fromValue(processo.getParte_tipo_documento()));
 				}	
 				tpa.getDocumento().add(tdoci);
@@ -235,13 +239,22 @@ public class ClientPjeService {
    	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(tienmap);
    	   	    	if (entregarManifestacaoProcessual!=null) {
 					processo.setRetorno_sucesso(entregarManifestacaoProcessual.isSucesso());
-	   	   	    	processo.setRetorno_protocolo_recebimento(entregarManifestacaoProcessual.getProtocoloRecebimento());
+	   	   	    	String protocoloRecebimento = entregarManifestacaoProcessual.getProtocoloRecebimento();
+					processo.setRetorno_protocolo_recebimento(new BigInteger(protocoloRecebimento));
 	   	   	    	processo.setRetorno_data_operacao(entregarManifestacaoProcessual.getDataOperacao());
 	   	   	    	processo.setRetorno_mensagem(entregarManifestacaoProcessual.getMensagem());
 	   	   	    	DataHandler recibo = entregarManifestacaoProcessual.getRecibo();
 					String ds = IOUtils.toString(recibo.getInputStream());
 	   	   	    	processo.setRetorno_recibo(ds);
 	   	 	       	processo.setSai_erro_sistema(null);
+	   	 	       	
+		       		String conteudoRetornado = null;
+	    			try {
+	    				conteudoRetornado = retornoToString(entregarManifestacaoProcessual);
+	    			} catch (JAXBException ex){
+	    				ex.printStackTrace();
+	    			}
+
    	 	       	}
 	   	 	    else {
 	   	 	    	processo.setEntra_status_processamento("02");
@@ -264,6 +277,15 @@ public class ClientPjeService {
    	 	    }
    	   	}
     }    
+
+    private String  retornoToString(TipoEntregarManifestacaoProcessualResposta servicoSaida) throws JAXBException {
+    	JAXBContext jaxbContext = JAXBContext.newInstance(TipoEntregarManifestacaoProcessualResposta.class);
+    	Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+    	StringWriter sw = new StringWriter();
+    	jaxbMarshaller.marshal(servicoSaida, sw);
+    	return  sw.toString();
+    	
+    }
     
     private static String formatTimeStamp(XMLGregorianCalendar cal)
     {
