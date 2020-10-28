@@ -240,17 +240,28 @@ public class ClientPjeService {
    	   	    	if (entregarManifestacaoProcessual!=null) {
 					processo.setRetorno_sucesso(entregarManifestacaoProcessual.isSucesso());
 	   	   	    	String protocoloRecebimento = entregarManifestacaoProcessual.getProtocoloRecebimento();
-					processo.setRetorno_protocolo_recebimento(new BigInteger(protocoloRecebimento));
-	   	   	    	processo.setRetorno_data_operacao(entregarManifestacaoProcessual.getDataOperacao());
-	   	   	    	processo.setRetorno_mensagem(entregarManifestacaoProcessual.getMensagem());
+	   	   	    	if (protocoloRecebimento!=null) {
+	   	   	    		processo.setRetorno_protocolo_recebimento(new BigInteger(protocoloRecebimento));
+	   	   	    	}	
+	   	   	    	String dataOperacao = entregarManifestacaoProcessual.getDataOperacao();
+	   	   	    	if (dataOperacao != null) {
+	   	   	    		processo.setRetorno_data_operacao(dataOperacao);
+	   	   	    	}	
+	   	   	    	String mensagem = entregarManifestacaoProcessual.getMensagem();
+	   	   	    	if (mensagem !=null) {
+	   	   	    		processo.setRetorno_mensagem(mensagem);
+	   	   	    	}	
 	   	   	    	DataHandler recibo = entregarManifestacaoProcessual.getRecibo();
-					String ds = IOUtils.toString(recibo.getInputStream());
-	   	   	    	processo.setRetorno_recibo(ds);
+	   	   	    	if (recibo !=null) {
+	   	   	    		String ds = IOUtils.toString(recibo.getInputStream());
+	   	   	    		processo.setRetorno_recibo(ds);
+	   	   	    	}	
 	   	 	       	processo.setSai_erro_sistema(null);
 	   	 	       	
 		       		String conteudoRetornado = null;
 	    			try {
 	    				conteudoRetornado = retornoToString(entregarManifestacaoProcessual);
+	    				processo.setSai_conteudo_retornado(conteudoRetornado);
 	    			} catch (JAXBException ex){
 	    				ex.printStackTrace();
 	    			}
