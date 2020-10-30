@@ -3,23 +3,26 @@ package br.jus.cnj.tipos_servico_intercomunicacao_2_2;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.activation.DataHandler;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlMimeType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import br.jus.cnj.intercomunicacao_2_2.TipoParametro;
 
 
 /**
- * Tipo de elemento que encapsula a resposta decorrente da manifestação apresentada. 
- * 				Sendo bem sucedida ou não, deve ser fornecido protocolo da operação. 
- * 				O recibo deverá ser apresentado em caso de sucesso.
+ * Tipo de elemento que encapsula a resposta decorrente da manifestaï¿½ï¿½o apresentada. 
+ * 				Sendo bem sucedida ou nï¿½o, deve ser fornecido protocolo da operaï¿½ï¿½o. 
+ * 				O recibo deverï¿½ ser apresentado em caso de sucesso.
  * 
  * <p>Classe Java de tipoEntregarManifestacaoProcessualResposta complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteï¿½do esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="tipoEntregarManifestacaoProcessualResposta"&gt;
@@ -40,6 +43,7 @@ import br.jus.cnj.intercomunicacao_2_2.TipoParametro;
  * 
  * 
  */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tipoEntregarManifestacaoProcessualResposta", propOrder = {
     "sucesso",
@@ -63,7 +67,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     protected List<TipoParametro> parametro;
 
     /**
-     * Obtém o valor da propriedade sucesso.
+     * Obtï¿½m o valor da propriedade sucesso.
      * 
      */
     public boolean isSucesso() {
@@ -79,7 +83,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     }
 
     /**
-     * Obtém o valor da propriedade mensagem.
+     * Obtï¿½m o valor da propriedade mensagem.
      * 
      * @return
      *     possible object is
@@ -103,7 +107,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     }
 
     /**
-     * Obtém o valor da propriedade protocoloRecebimento.
+     * Obtï¿½m o valor da propriedade protocoloRecebimento.
      * 
      * @return
      *     possible object is
@@ -127,7 +131,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     }
 
     /**
-     * Obtém o valor da propriedade dataOperacao.
+     * Obtï¿½m o valor da propriedade dataOperacao.
      * 
      * @return
      *     possible object is
@@ -151,7 +155,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     }
 
     /**
-     * Obtém o valor da propriedade recibo.
+     * Obtï¿½m o valor da propriedade recibo.
      * 
      * @return
      *     possible object is

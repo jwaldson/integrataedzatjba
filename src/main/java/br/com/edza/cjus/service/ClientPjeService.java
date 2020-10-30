@@ -47,7 +47,6 @@ import br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoEntregarManifestacaoPro
 @Component
 public class ClientPjeService {	
 	
-	
     @Autowired
     ServicoIntercomunicacao222 pjeService;
   
@@ -75,7 +74,7 @@ public class ClientPjeService {
 	   	   		tienmap.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
 
 	   	   		tienmap.setIdManifestante(processo.getId_manifestante().toString());
-//	   	   		String numeroProcesso = processo.getgetNumeroProcesso();
+//	   	   		String numeroProcesso = processo.getNumeroProcesso();
 
 //	   	   		tienmap.setNumeroProcesso(numeroProcesso);
 	   	   		String senhaManifestante = processo.getSenha_manifestante();
@@ -238,7 +237,14 @@ public class ClientPjeService {
 	   	
    	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(tienmap);
    	   	    	if (entregarManifestacaoProcessual!=null) {
-					processo.setRetorno_sucesso(entregarManifestacaoProcessual.isSucesso());
+					boolean sucesso = entregarManifestacaoProcessual.isSucesso();
+					if (sucesso) {
+						processo.setEntra_status_processamento("01");
+					} else {
+						processo.setEntra_status_processamento("03");
+					}
+	   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(LocalDateTime.now())));
+					processo.setRetorno_sucesso(sucesso);
 	   	   	    	String protocoloRecebimento = entregarManifestacaoProcessual.getProtocoloRecebimento();
 	   	   	    	if (protocoloRecebimento!=null) {
 	   	   	    		processo.setRetorno_protocolo_recebimento(new BigInteger(protocoloRecebimento));
