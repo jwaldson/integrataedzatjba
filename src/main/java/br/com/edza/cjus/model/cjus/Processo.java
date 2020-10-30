@@ -18,7 +18,6 @@ public class Processo implements Serializable {
 
 	@Id
 	@Column(name="transitorio_cnj_interop_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="entra_status_processamento")
