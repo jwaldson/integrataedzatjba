@@ -21,7 +21,7 @@ import org.apache.cxf.interceptor.OutInterceptors;
 @WebService(targetNamespace = "http://www.cnj.jus.br/servico-intercomunicacao-2.2.2/", name = "servico-intercomunicacao-2.2.2")
 @XmlSeeAlso({br.jus.cnj.intercomunicacao_2_2.ObjectFactory.class, br.jus.cnj.tipos_servico_intercomunicacao_2_2.ObjectFactory.class, br.jus.cnj.servico_intercomunicacao_2_2.ObjectFactory.class, br.jus.cnj.mni.cda.ObjectFactory.class})
 @InInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingInInterceptor")
-@OutInterceptors(interceptors = "org.apache.cxf.interceptor.LoggingOutInterceptor")
+@OutInterceptors(interceptors = "br.com.edza.cjus.conf.InterceptorTjba")
 @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface ServicoIntercomunicacao222 {
 
