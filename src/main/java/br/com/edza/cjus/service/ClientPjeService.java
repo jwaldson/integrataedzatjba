@@ -115,6 +115,7 @@ public class ClientPjeService {
 	   	   	    Integer nivelSigiloDocumento = processo.getNivel_sigilo_documento();
 				td.setNivelSigilo(nivelSigiloDocumento!=null?nivelSigiloDocumento:null);
 	   	   	    String tipoDocumento = processo.getTipo_documento();
+				td.setTipoDocumento(tipoDocumento!=null?tipoDocumento:null);
 				td.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
    	   	    	TipoAssinatura ta = new TipoAssinatura();
    	   	    	String algoritmoHashAssinatura = processo.getAlgoritmo_hash_assinatura();
