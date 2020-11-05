@@ -24,7 +24,7 @@ public class Processo implements Serializable {
 	private String entra_status_processamento;
 
 	@Column(name="id_manifestante")
-	private BigInteger id_manifestante;
+	private String id_manifestante;
 
 	@Column(name="senha_manifestante")
 	private String senha_manifestante;
@@ -241,7 +241,7 @@ public class Processo implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Processo(Integer id, BigInteger id_manifestante, String senha_manifestante, Integer classe_processual, Integer codigo_localidade,
+	public Processo(Integer id, String id_manifestante, String senha_manifestante, Integer classe_processual, Integer codigo_localidade,
 					Integer competencia, String modalidade_vinculacao_processo, String prioridade, Double valor_causa, Boolean assistencia_judiciaria, BigInteger nivel_sigilo,
 					String data_ajuizamento, String outro_parametro, String polo, String parte_nome, String parte_sexo, String parte_nome_genitor, String parte_nome_genitora,
 					String parte_data_nascimento, String parte_data_obito, BigInteger parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
@@ -347,11 +347,11 @@ public class Processo implements Serializable {
 		this.entra_status_processamento = entra_status_processamento;
 	}
 
-	public BigInteger getId_manifestante() {
+	public String getId_manifestante() {
 		return id_manifestante;
 	}
 
-	public void setId_manifestante(BigInteger id_manifestante) {
+	public void setId_manifestante(String id_manifestante) {
 		this.id_manifestante = id_manifestante;
 	}
 

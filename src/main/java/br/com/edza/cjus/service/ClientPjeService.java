@@ -73,7 +73,7 @@ public class ClientPjeService {
    	   		try {
 	   	   		tienmap.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
 
-	   	   		tienmap.setIdManifestante(processo.getId_manifestante().toString());
+	   	   		tienmap.setIdManifestante(processo.getId_manifestante());
 //	   	   		String numeroProcesso = processo.getNumeroProcesso();
 
 //	   	   		tienmap.setNumeroProcesso(numeroProcesso);
@@ -369,7 +369,7 @@ public class ClientPjeService {
     private void teste() {
     	Processo processo = new Processo();
     	processo.setId(300);
-    	processo.setId_manifestante(new BigInteger("75293730215"));
+    	processo.setId_manifestante("75293730215");
     	processo.setSenha_manifestante("admin123");
     	processo.setClasse_processual(1680);
     	processo.setCodigo_localidade(2);
