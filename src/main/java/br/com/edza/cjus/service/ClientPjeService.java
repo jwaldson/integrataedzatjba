@@ -82,7 +82,7 @@ public class ClientPjeService {
 	   	   			throw new Exception("Paramentos autenticação insuficientes! Senha null.");
 	   	   		}
 	   	   		tienmap.setSenhaManifestante(senhaManifestante);
-	
+
 	    		TipoCabecalhoProcesso tdb = new TipoCabecalhoProcesso();
 	    		Integer classeProcessual = processo.getClasse_processual();
 				tdb.setClasseProcessual(classeProcessual!=null?classeProcessual:null);
@@ -145,6 +145,11 @@ public class ClientPjeService {
     			}	
     			
     			tdb.getPolo().add(tp);
+    			
+    			String prioridade = processo.getPrioridade();
+    			if (prioridade!=null) {
+    				tdb.getPrioridade().add(prioridade);
+    			}	
     			
     			TipoParte tpp = new TipoParte();
    				TipoRepresentanteProcessual adv = new TipoRepresentanteProcessual();
@@ -237,7 +242,6 @@ public class ClientPjeService {
 				tpa.getDocumento().add(tdoci);
 				tpp.setPessoa(tpa);
    	    	 	tienmap.setDadosBasicos(tdb);
-	   	    	   	
 	   	
    	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(tienmap);
    	   	    	if (entregarManifestacaoProcessual!=null) {
