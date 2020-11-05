@@ -143,7 +143,9 @@ public class ClientPjeService {
     			if (modalidadeProcessual!=null) {
     				tp.setPolo(ModalidadePoloProcessual.fromValue(modalidadeProcessual));
     			}	
-	   	    	    		
+    			
+    			tdb.getPolo().add(tp);
+    			
     			TipoParte tpp = new TipoParte();
    				TipoRepresentanteProcessual adv = new TipoRepresentanteProcessual();
    				String inscricao = processo.getRepres_processual_inscricao();
