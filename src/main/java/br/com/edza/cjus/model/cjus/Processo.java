@@ -111,7 +111,7 @@ public class Processo implements Serializable {
 	private String parte_outro_nome;
 
 	@Column(name="endereco_cep")
-	private Integer endereco_cep;
+	private String endereco_cep;
 	
 	@Column(name="endereco_logradouro")
 	private String endereco_logradouro;
@@ -246,7 +246,7 @@ public class Processo implements Serializable {
 					String data_ajuizamento, String outro_parametro, String polo, String parte_nome, String parte_sexo, String parte_nome_genitor, String parte_nome_genitora,
 					String parte_data_nascimento, String parte_data_obito, BigInteger parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
 					String parte_estado_natural, String parte_nacionalidade, String parte_codigo_documento, String parte_emissor_documento, String parte_tipo_documento,
-					String parte_nome_detentora, String parte_outro_nome,Integer endereco_cep, String endereco_logradouro, String endereco_numero, String endereco_complemento,
+					String parte_nome_detentora, String parte_outro_nome,String endereco_cep, String endereco_logradouro, String endereco_numero, String endereco_complemento,
 					String endereco_bairro, String endereco_cidade, String endereco_estado, String endereco_pais, Boolean repres_processual_intimacao, String repres_processual_nome,
 					String repres_processual_inscricao, String repres_processual_numero_documento_principal, String repres_processual_tipo_representante, Boolean assunto_processual_principal,
 					Integer assunto_processual_codigo_nacional, Integer assunto_processual_codigo_assunto, Integer assunto_processual_codigo_pai_acional, String assunto_processual_descricao,
@@ -579,11 +579,11 @@ public class Processo implements Serializable {
 		this.parte_outro_nome = parte_outro_nome;
 	}
 
-	public Integer getEndereco_cep() {
+	public String getEndereco_cep() {
 		return endereco_cep;
 	}
 
-	public void setEndereco_cep(Integer endereco_cep) {
+	public void setEndereco_cep(String endereco_cep) {
 		this.endereco_cep = endereco_cep;
 	}
 

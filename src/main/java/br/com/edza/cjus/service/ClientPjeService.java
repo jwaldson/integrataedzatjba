@@ -207,7 +207,7 @@ public class ClientPjeService {
 				TipoEndereco endPessoaParte = new TipoEndereco(); 
 				String bairro = processo.getEndereco_bairro();
 				endPessoaParte.setBairro(bairro!=null?bairro:null);
-				Integer cep = processo.getEndereco_cep();
+				String cep = processo.getEndereco_cep();
 				endPessoaParte.setCep(cep!=null?cep.toString():null);
 				String cidade = processo.getEndereco_cidade();
 				endPessoaParte.setCidade(cidade!=null?cidade:null);
@@ -396,7 +396,7 @@ public class ClientPjeService {
     	processo.setParte_emissor_documento("SSP");
     	processo.setParte_tipo_documento(ModalidadeDocumentoIdentificador.CMF.value());
     	
-    	processo.setEndereco_cep(Integer.parseInt("70091900"));
+    	processo.setEndereco_cep("70091900");
     	processo.setEndereco_logradouro("Praça do Buriti, Lote 2, Sede do MPDFT");
     	processo.setEndereco_numero("2");
     	processo.setEndereco_bairro("Eixo Monumental");
