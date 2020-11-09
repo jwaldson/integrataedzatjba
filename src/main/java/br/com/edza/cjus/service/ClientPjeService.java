@@ -68,12 +68,11 @@ public class ClientPjeService {
    	   	List<Processo> processos = repository.consultaRegistrosProcessar();
    	   	for (Processo processo : processos) {
 
-   	   		TipoEntregarManifestacaoProcessual tienmap = new TipoEntregarManifestacaoProcessual();
+   	   		TipoEntregarManifestacaoProcessual manifestaaoProcessual = new TipoEntregarManifestacaoProcessual();
 
    	   		try {
-	   	   		tienmap.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
-
-	   	   		tienmap.setIdManifestante(processo.getId_manifestante());
+	   	   		manifestaaoProcessual.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
+	   	   		manifestaaoProcessual.setIdManifestante(processo.getId_manifestante());
 //	   	   		String numeroProcesso = processo.getNumeroProcesso();
 
 //	   	   		tienmap.setNumeroProcesso(numeroProcesso);
@@ -81,78 +80,75 @@ public class ClientPjeService {
 				if (senhaManifestante==null) {
 	   	   			throw new Exception("Paramentos autenticação insuficientes! Senha null.");
 	   	   		}
-	   	   		tienmap.setSenhaManifestante(senhaManifestante);
+	   	   		manifestaaoProcessual.setSenhaManifestante(senhaManifestante);
 
-	    		TipoCabecalhoProcesso tdb = new TipoCabecalhoProcesso();
+	    		TipoCabecalhoProcesso cabecalhoProcesso = new TipoCabecalhoProcesso();
 	    		Integer classeProcessual = processo.getClasse_processual();
-				tdb.setClasseProcessual(classeProcessual!=null?classeProcessual:null);
+				cabecalhoProcesso.setClasseProcessual(classeProcessual!=null?classeProcessual:null);
 	    		Integer codigoLocalidade = processo.getCodigo_localidade();
-				tdb.setCodigoLocalidade(codigoLocalidade!=null?codigoLocalidade.toString():null);
+				cabecalhoProcesso.setCodigoLocalidade(codigoLocalidade!=null?codigoLocalidade.toString():null);
 	    		Double valorCausa = processo.getValor_causa();
-				tdb.setValorCausa(valorCausa!=null?valorCausa:null);
+				cabecalhoProcesso.setValorCausa(valorCausa!=null?valorCausa:null);
    	   		
    	   	    	Integer id = processo.getId();
 
-   	   	    	TipoDocumento td = new TipoDocumento();
+   	   	    	TipoDocumento tpDocumento = new TipoDocumento();
    	    		String conteudoDocumento = processo.getConteudo_documento();
    	    		if (conteudoDocumento!=null) {
    	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
-   	    			td.setConteudo(new DataHandler(ds));
+   	    			tpDocumento.setConteudo(new DataHandler(ds));
    	    		}	
 	   	   	    
    	    		String dataHoraDocumento = processo.getData_hora_documento();
 	   	   	    if (dataHoraDocumento !=null) {
-	   	   	    	td.setDataHora(dataHoraDocumento);
+	   	   	    	tpDocumento.setDataHora(dataHoraDocumento);
 	   	   	    }	
    	    		String descricaoDocumento = processo.getDescricao_documento();
-				td.setDescricao(descricaoDocumento!=null?descricaoDocumento:null);
+				tpDocumento.setDescricao(descricaoDocumento!=null?descricaoDocumento:null);
    	    		String hashDocumento = processo.getHash_documento();
-				td.setHash(hashDocumento!=null?hashDocumento:null);
+				tpDocumento.setHash(hashDocumento!=null?hashDocumento:null);
    	    		String documentoIdVinculado = processo.getId_documento_vinculado();
-   	    		td.setIdDocumentoVinculado(documentoIdVinculado!=null?documentoIdVinculado:null);
+   	    		tpDocumento.setIdDocumentoVinculado(documentoIdVinculado!=null?documentoIdVinculado:null);
 	   	   	    String mimetypeDocumento = processo.getMimetype_documento();
-				td.setMimetype(mimetypeDocumento!=null?mimetypeDocumento:null);
+				tpDocumento.setMimetype(mimetypeDocumento!=null?mimetypeDocumento:null);
 	   	   	    Integer nivelSigiloDocumento = processo.getNivel_sigilo_documento();
-				td.setNivelSigilo(nivelSigiloDocumento!=null?nivelSigiloDocumento:null);
+				tpDocumento.setNivelSigilo(nivelSigiloDocumento!=null?nivelSigiloDocumento:null);
 	   	   	    String tipoDocumento = processo.getTipo_documento();
-				td.setTipoDocumento(tipoDocumento!=null?tipoDocumento:null);
-				td.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
-   	   	    	TipoAssinatura ta = new TipoAssinatura();
+				tpDocumento.setTipoDocumento(tipoDocumento!=null?tipoDocumento:null);
+				tpDocumento.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
+   	   	    	TipoAssinatura tpAssinatura = new TipoAssinatura();
    	   	    	String algoritmoHashAssinatura = processo.getAlgoritmo_hash_assinatura();
-				ta.setAlgoritmoHash(algoritmoHashAssinatura!=null?algoritmoHashAssinatura:null);
+				tpAssinatura.setAlgoritmoHash(algoritmoHashAssinatura!=null?algoritmoHashAssinatura:null);
      			String assinatura = processo.getAssinatura();
-				ta.setAssinatura(assinatura!=null?assinatura:null);
+				tpAssinatura.setAssinatura(assinatura!=null?assinatura:null);
     			String cadeiaCertificadoAssinatura = processo.getCadeia_certificado_assinatura();
-				ta.setCadeiaCertificado(cadeiaCertificadoAssinatura!=null?cadeiaCertificadoAssinatura:null);
+				tpAssinatura.setCadeiaCertificado(cadeiaCertificadoAssinatura!=null?cadeiaCertificadoAssinatura:null);
     			String codificacaoCertificadoAssinatura = processo.getCodificacao_certificado_assinatura();
-				ta.setCodificacaoCertificado(codificacaoCertificadoAssinatura!=null?codificacaoCertificadoAssinatura:null);
+				tpAssinatura.setCodificacaoCertificado(codificacaoCertificadoAssinatura!=null?codificacaoCertificadoAssinatura:null);
     			String dataAssinatura = processo.getDataassinatura();
     			if (dataAssinatura!=null) {
-    				ta.setDataAssinatura(dataAssinatura);
+    				tpAssinatura.setDataAssinatura(dataAssinatura);
     			}	
-    			td.getAssinatura().add(ta);
-   	    		tienmap.getDocumento().add(td);
+    			tpDocumento.getAssinatura().add(tpAssinatura);
+   	    		manifestaaoProcessual.getDocumento().add(tpDocumento);
 	   	    	    	
-  	    		TipoAssuntoProcessual tap = new TipoAssuntoProcessual();
+  	    		TipoAssuntoProcessual tpAssuntoProcessual = new TipoAssuntoProcessual();
    	    		Integer codigoNacional = processo.getAssunto_processual_codigo_nacional();
-				tap.setCodigoNacional(codigoNacional!=null?codigoNacional:null);
-   	    		tap.setPrincipal(processo.getAssunto_processual_principal());
-   	    		tdb.getAssunto().add(tap);
+				tpAssuntoProcessual.setCodigoNacional(codigoNacional!=null?codigoNacional:null);
+   	    		tpAssuntoProcessual.setPrincipal(processo.getAssunto_processual_principal());
+   	    		cabecalhoProcesso.getAssunto().add(tpAssuntoProcessual);
 
-   	    		TipoPoloProcessual tp = new TipoPoloProcessual();
+   	    		TipoPoloProcessual polo = new TipoPoloProcessual();
    	    		String modalidadeProcessual = processo.getPolo();
     			if (modalidadeProcessual!=null) {
-    				tp.setPolo(ModalidadePoloProcessual.fromValue(modalidadeProcessual));
+    				polo.setPolo(ModalidadePoloProcessual.fromValue(modalidadeProcessual));
     			}	
-    			
-    			tdb.getPolo().add(tp);
-    			
     			String prioridade = processo.getPrioridade();
     			if (prioridade!=null) {
-    				tdb.getPrioridade().add(prioridade);
+    				cabecalhoProcesso.getPrioridade().add(prioridade);
     			}	
     			
-    			TipoParte tpp = new TipoParte();
+    			TipoParte parte = new TipoParte();
    				TipoRepresentanteProcessual adv = new TipoRepresentanteProcessual();
    				String inscricao = processo.getRepres_processual_inscricao();
 				adv.setInscricao(inscricao!=null?inscricao:null);
@@ -186,31 +182,28 @@ public class ClientPjeService {
 //				enderecoAdvogado.setPais(pais!=null?pais:null);
 //				dv.getEndereco().add(enderecoAdvogado);	
 				
-				
-				tpp.getAdvogado().add(adv);
-				
-				TipoPessoa tpa = new TipoPessoa();
+				TipoPessoa pessoa = new TipoPessoa();
 				String cidadeNatural = processo.getParte_cidade_natural();
-				tpa.setCidadeNatural(cidadeNatural!=null?cidadeNatural:null);
+				pessoa.setCidadeNatural(cidadeNatural!=null?cidadeNatural:null);
 				if (processo.getParte_data_nascimento()!=null) {
-					tpa.setDataNascimento(processo.getParte_data_nascimento());
+					pessoa.setDataNascimento(processo.getParte_data_nascimento());
 				}	
 				String estadoNatural = processo.getParte_estado_natural();
-				tpa.setEstadoNatural(estadoNatural!=null?estadoNatural:null);
+				pessoa.setEstadoNatural(estadoNatural!=null?estadoNatural:null);
 				String nacionalidade = processo.getParte_nacionalidade();
-				tpa.setNacionalidade(nacionalidade!=null?nacionalidade:null);
+				pessoa.setNacionalidade(nacionalidade!=null?nacionalidade:null);
 				String nomeParte = processo.getParte_nome();
-				tpa.setNome(nomeParte!=null?nomeParte:null);
+				pessoa.setNome(nomeParte!=null?nomeParte:null);
 				BigInteger numeroDocumentoPrincipalParte = processo.getParte_numero_documento_principal();
-				tpa.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParte!=null?String.valueOf(numeroDocumentoPrincipalParte):null);
+				pessoa.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParte!=null?String.valueOf(numeroDocumentoPrincipalParte):null);
 				//   	    	    				tpa.setPessoaVinculada(pessoaParte.get);
 				if (processo.getParte_sexo()!=null) {
 					ModalidadeGeneroPessoa fromValue = ModalidadeGeneroPessoa.fromValue(processo.getParte_sexo());
-					tpa.setSexo(fromValue);
+					pessoa.setSexo(fromValue);
 				}	
 				if (processo.getParte_tipo_pessoa()!=null) {
 					TipoQualificacaoPessoa fromValue2 = TipoQualificacaoPessoa.fromValue(processo.getParte_tipo_pessoa());
-					tpa.setTipoPessoa(fromValue2);
+					pessoa.setTipoPessoa(fromValue2);
 				}		
 				TipoEndereco endPessoaParte = new TipoEndereco(); 
 				String bairro = processo.getEndereco_bairro();
@@ -229,7 +222,7 @@ public class ClientPjeService {
 				endPessoaParte.setNumero(numero!=null?numero:null);
 				String pais = processo.getEndereco_pais();
 				endPessoaParte.setPais(pais!=null?pais:null);
-				tpa.getEndereco().add(endPessoaParte);	
+				pessoa.getEndereco().add(endPessoaParte);	
 				   	    	    					
 				TipoDocumentoIdentificacao tdoci = new TipoDocumentoIdentificacao();
 				String codigoDocumento = processo.getParte_codigo_documento();
@@ -240,11 +233,178 @@ public class ClientPjeService {
 				if (processo.getParte_tipo_documento() != null && processo.getParte_tipo_documento().length()>0) {
 					tdoci.setTipoDocumento(ModalidadeDocumentoIdentificador.fromValue(processo.getParte_tipo_documento()));
 				}	
-				tpa.getDocumento().add(tdoci);
-				tpp.setPessoa(tpa);
-   	    	 	tienmap.setDadosBasicos(tdb);
+				pessoa.getDocumento().add(tdoci);
+				parte.setPessoa(pessoa);
+				parte.getAdvogado().add(adv);
+				
+				polo.getParte().add(parte);
+    			cabecalhoProcesso.getPolo().add(polo);
+    			
+    			//
+    			String nomeParteReferencia="";
+    			String nomeAdvReferencia="";
+    			
+    			List<Processo> processosViculados = repository.consultaRegistrosvinculados(processo.getProcessoid());
+    			for (Processo processoVinculado : processosViculados) {
+    				
+    				// Documento Processo Vinculado
+       	   	    	TipoDocumento tpDocumentoProcessoVinculado = new TipoDocumento();
+       	    		String conteudoDocumentoProcessoVinculado = processoVinculado.getConteudo_documento();
+       	    		if (conteudoDocumentoProcessoVinculado!=null) {
+       	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
+       	    			tpDocumentoProcessoVinculado.setConteudo(new DataHandler(ds));
+       	    		}	
+    	   	   	    
+       	    		String dataHoraDocumentoProcessoVinculado = processoVinculado.getData_hora_documento();
+    	   	   	    if (dataHoraDocumentoProcessoVinculado !=null) {
+    	   	   	    	tpDocumentoProcessoVinculado.setDataHora(dataHoraDocumentoProcessoVinculado);
+    	   	   	    }	
+       	    		String descricaoDocumentoProcessoVinculado = processoVinculado.getDescricao_documento();
+    				tpDocumentoProcessoVinculado.setDescricao(descricaoDocumentoProcessoVinculado!=null?descricaoDocumentoProcessoVinculado:null);
+       	    		String hashDocumentoProcessoVinculado = processoVinculado.getHash_documento();
+    				tpDocumentoProcessoVinculado.setHash(hashDocumentoProcessoVinculado!=null?hashDocumentoProcessoVinculado:null);
+       	    		String documentoIdVinculadoProcessoVinculado = processoVinculado.getId_documento_vinculado();
+       	    		tpDocumentoProcessoVinculado.setIdDocumentoVinculado(documentoIdVinculadoProcessoVinculado!=null?documentoIdVinculadoProcessoVinculado:null);
+    	   	   	    String mimetypeDocumentoProcessoVinculado = processoVinculado.getMimetype_documento();
+    				tpDocumentoProcessoVinculado.setMimetype(mimetypeDocumentoProcessoVinculado!=null?mimetypeDocumentoProcessoVinculado:null);
+    	   	   	    Integer nivelSigiloDocumentoProcessoVinculado = processoVinculado.getNivel_sigilo_documento();
+    				tpDocumentoProcessoVinculado.setNivelSigilo(nivelSigiloDocumentoProcessoVinculado!=null?nivelSigiloDocumentoProcessoVinculado:null);
+    	   	   	    String tipoDocumentoProcessoVinculado = processoVinculado.getTipo_documento();
+    				tpDocumentoProcessoVinculado.setTipoDocumento(tipoDocumentoProcessoVinculado!=null?tipoDocumentoProcessoVinculado:null);
+    				tpDocumentoProcessoVinculado.setTipoDocumentoLocal(tipoDocumentoProcessoVinculado!=null?tipoDocumentoProcessoVinculado:null);
+       	   	    	TipoAssinatura tpAssinaturaProcessoVinculado = new TipoAssinatura();
+       	   	    	String algoritmoHashAssinaturaProcessoVinculado = processoVinculado.getAlgoritmo_hash_assinatura();
+    				tpAssinaturaProcessoVinculado.setAlgoritmoHash(algoritmoHashAssinaturaProcessoVinculado!=null?algoritmoHashAssinaturaProcessoVinculado:null);
+         			String assinaturaProcessoVinculado = processoVinculado.getAssinatura();
+    				tpAssinaturaProcessoVinculado.setAssinatura(assinaturaProcessoVinculado!=null?assinaturaProcessoVinculado:null);
+        			String cadeiaCertificadoAssinaturaProcessoVinculado = processoVinculado.getCadeia_certificado_assinatura();
+    				tpAssinaturaProcessoVinculado.setCadeiaCertificado(cadeiaCertificadoAssinaturaProcessoVinculado!=null?cadeiaCertificadoAssinaturaProcessoVinculado:null);
+        			String codificacaoCertificadoAssinaturaProcessoVinculado = processoVinculado.getCodificacao_certificado_assinatura();
+    				tpAssinaturaProcessoVinculado.setCodificacaoCertificado(codificacaoCertificadoAssinaturaProcessoVinculado!=null?codificacaoCertificadoAssinaturaProcessoVinculado:null);
+        			String dataAssinaturaProcessoVinculado = processoVinculado.getDataassinatura();
+        			if (dataAssinaturaProcessoVinculado!=null) {
+        				tpAssinaturaProcessoVinculado.setDataAssinatura(dataAssinaturaProcessoVinculado);
+        			}	
+        			tpDocumentoProcessoVinculado.getAssinatura().add(tpAssinaturaProcessoVinculado);
+       	    		manifestaaoProcessual.getDocumento().add(tpDocumentoProcessoVinculado);
+
+    				// Polo
+    				TipoPoloProcessual poloVinculado = new TipoPoloProcessual();
+       	    		String modalidadeProcessualProcessoVinculado = processo.getPolo();
+        			if (modalidadeProcessualProcessoVinculado!=null) {
+        				poloVinculado.setPolo(ModalidadePoloProcessual.fromValue(modalidadeProcessualProcessoVinculado));
+        			}	
+
+        			//Advogado
+        			TipoParte parteProcessoViculado = new TipoParte();
+       				TipoRepresentanteProcessual advProcessoViculado = new TipoRepresentanteProcessual();
+
+       				String inscricaoProcessoViculado = processoVinculado.getRepres_processual_inscricao();
+       				advProcessoViculado.setInscricao(inscricaoProcessoViculado!=null?inscricaoProcessoViculado:null);
+
+    				String nomeAdvogadoProcessoVinculado = processo.getRepres_processual_nome();
+    				advProcessoViculado.setNome(nomeAdvogadoProcessoVinculado!=null?nomeAdvogadoProcessoVinculado:null);
+       				
+    				String numeroDocumentoPrincipalProcessoVinculado = processoVinculado.getRepres_processual_numero_documento_principal();
+    				advProcessoViculado.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalProcessoVinculado!=null?numeroDocumentoPrincipalProcessoVinculado:null);
+
+    				String tipoRepresentanteProcessoVinculado = processoVinculado.getRepres_processual_tipo_representante();
+       				if (tipoRepresentanteProcessoVinculado!=null && tipoRepresentanteProcessoVinculado.length()>0 ) {
+       					ModalidadeRepresentanteProcessual fromValue = ModalidadeRepresentanteProcessual.fromValue(tipoRepresentanteProcessoVinculado);
+       					advProcessoViculado.setTipoRepresentante(fromValue);
+       				}
+    				TipoEndereco enderecoAdvogadoProcessoVinculado = new TipoEndereco();
+    				
+    				// Pessoa
+    				TipoPessoa pessoaProcessoVinculado = new TipoPessoa();
+    				
+    				String cidadeNaturalProcessoVinculado = processoVinculado.getParte_cidade_natural();
+    				pessoaProcessoVinculado.setCidadeNatural(cidadeNaturalProcessoVinculado!=null?cidadeNaturalProcessoVinculado:null);
+    				
+    				if (processoVinculado.getParte_data_nascimento()!=null) {
+    					pessoaProcessoVinculado.setDataNascimento(processoVinculado.getParte_data_nascimento());
+    				}
+    				
+    				String estadoNaturalProcessoVinculado = processoVinculado.getParte_estado_natural();
+    				
+    				pessoaProcessoVinculado.setEstadoNatural(estadoNaturalProcessoVinculado!=null?estadoNaturalProcessoVinculado:null);
+    				
+    				String nacionalidadeProcessoVinculado = processoVinculado.getParte_nacionalidade();
+    				pessoaProcessoVinculado.setNacionalidade(nacionalidadeProcessoVinculado!=null?nacionalidadeProcessoVinculado:null);
+    				String nomeParteProcessoVinculado = processoVinculado.getParte_nome();
+    				pessoaProcessoVinculado.setNome(nomeParteProcessoVinculado!=null?nomeParteProcessoVinculado:null);
+    				BigInteger numeroDocumentoPrincipalParteProcessoVinculado = processoVinculado.getParte_numero_documento_principal();
+    				pessoaProcessoVinculado.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParteProcessoVinculado!=null?String.valueOf(numeroDocumentoPrincipalParteProcessoVinculado):null);
+    				//   	    	    				tpa.setPessoaVinculada(pessoaParte.get);
+    				if (processoVinculado.getParte_sexo()!=null) {
+    					ModalidadeGeneroPessoa fromValue = ModalidadeGeneroPessoa.fromValue(processoVinculado.getParte_sexo());
+    					pessoaProcessoVinculado.setSexo(fromValue);
+    				}	
+    				if (processoVinculado.getParte_tipo_pessoa()!=null) {
+    					TipoQualificacaoPessoa fromValue2 = TipoQualificacaoPessoa.fromValue(processoVinculado.getParte_tipo_pessoa());
+    					pessoaProcessoVinculado.setTipoPessoa(fromValue2);
+    				}		
+    				TipoEndereco endPessoaParteProcessoVinculado = new TipoEndereco(); 
+
+    				String bairroProcessoVinculado = processoVinculado.getEndereco_bairro();
+    				endPessoaParteProcessoVinculado.setBairro(bairroProcessoVinculado!=null?bairroProcessoVinculado:null);
+
+    				String cepProcessoVinculado = processoVinculado.getEndereco_cep();
+    				endPessoaParteProcessoVinculado.setCep(cepProcessoVinculado!=null?cepProcessoVinculado.toString():null);
+
+    				String cidadeProcessoVinculado = processoVinculado.getEndereco_cidade();
+    				endPessoaParteProcessoVinculado.setCidade(cidadeProcessoVinculado!=null?cidadeProcessoVinculado:null);
+
+    				String complementoProcessoVinculado = processoVinculado.getEndereco_complemento();
+    				endPessoaParteProcessoVinculado.setComplemento(complementoProcessoVinculado!=null?complementoProcessoVinculado:null);
+
+    				String estadoProcessoVinculado = processoVinculado.getEndereco_estado();
+    				endPessoaParteProcessoVinculado.setEstado(estadoProcessoVinculado!=null?estadoProcessoVinculado:null);
+
+    				String logradouroProcessoVinculado = processo.getEndereco_logradouro();
+    				endPessoaParteProcessoVinculado.setLogradouro(logradouroProcessoVinculado!=null?logradouroProcessoVinculado:null);
+
+    				String numeroProcessoVinculado = processoVinculado.getEndereco_numero();
+    				endPessoaParteProcessoVinculado.setNumero(numeroProcessoVinculado!=null?numeroProcessoVinculado:null);
+
+    				String paisProcessoVinculado = processoVinculado.getEndereco_pais();
+    				endPessoaParteProcessoVinculado.setPais(paisProcessoVinculado!=null?paisProcessoVinculado:null);
+    				pessoaProcessoVinculado.getEndereco().add(endPessoaParteProcessoVinculado);	
+    				   	    	    					
+    				TipoDocumentoIdentificacao tdociProcessoVinculado = new TipoDocumentoIdentificacao();
+
+    				String codigoDocumentoProcessoVinculado = processoVinculado.getParte_codigo_documento();
+
+    				tdociProcessoVinculado.setCodigoDocumento(codigoDocumentoProcessoVinculado!=null?codigoDocumentoProcessoVinculado:null);
+
+    				String emissorDocumentoProcessoVinculado = processoVinculado.getParte_emissor_documento();
+    				tdociProcessoVinculado.setEmissorDocumento(emissorDocumentoProcessoVinculado!=null?emissorDocumentoProcessoVinculado:null);
+    				
+    				tdociProcessoVinculado.setNome(nomeParteProcessoVinculado);
+
+    				if (processoVinculado.getParte_tipo_documento() != null && 
+    					processoVinculado.getParte_tipo_documento().length()>0) {
+    					tdociProcessoVinculado.setTipoDocumento(ModalidadeDocumentoIdentificador.fromValue(processoVinculado.getParte_tipo_documento()));
+    				}	
+
+    				pessoaProcessoVinculado.getDocumento().add(tdociProcessoVinculado);
+    				parteProcessoViculado.setPessoa(pessoaProcessoVinculado);
+    				parteProcessoViculado.getAdvogado().add(advProcessoViculado);
+
+       	   			if (nomeParteReferencia.equals(pessoaProcessoVinculado.getNome()) && 
+       						nomeAdvReferencia.equals(advProcessoViculado.getNome())) {
+       	   				poloVinculado.getParte().add(parteProcessoViculado);
+       	   				cabecalhoProcesso.getPolo().add(poloVinculado);
+       	   			}	
+       	   		nomeParteReferencia=pessoaProcessoVinculado.getNome();
+       	   		nomeAdvReferencia=advProcessoViculado.getNome();
+       	   		
+    			}
+    			//
+
+   				manifestaaoProcessual.setDadosBasicos(cabecalhoProcesso);
 	   	
-   	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(tienmap);
+   	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(manifestaaoProcessual);
    	   	    	if (entregarManifestacaoProcessual!=null) {
 					boolean sucesso = entregarManifestacaoProcessual.isSucesso();
 					if (sucesso) {
