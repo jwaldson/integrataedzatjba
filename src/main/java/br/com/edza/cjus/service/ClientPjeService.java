@@ -194,7 +194,7 @@ public class ClientPjeService {
 				pessoa.setNacionalidade(nacionalidade!=null?nacionalidade:null);
 				String nomeParte = processo.getParte_nome();
 				pessoa.setNome(nomeParte!=null?nomeParte:null);
-				BigInteger numeroDocumentoPrincipalParte = processo.getParte_numero_documento_principal();
+				String numeroDocumentoPrincipalParte = processo.getParte_numero_documento_principal();
 				pessoa.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParte!=null?String.valueOf(numeroDocumentoPrincipalParte):null);
 				//   	    	    				tpa.setPessoaVinculada(pessoaParte.get);
 				if (processo.getParte_sexo()!=null) {
@@ -333,7 +333,7 @@ public class ClientPjeService {
     				pessoaProcessoVinculado.setNacionalidade(nacionalidadeProcessoVinculado!=null?nacionalidadeProcessoVinculado:null);
     				String nomeParteProcessoVinculado = processoVinculado.getParte_nome();
     				pessoaProcessoVinculado.setNome(nomeParteProcessoVinculado!=null?nomeParteProcessoVinculado:null);
-    				BigInteger numeroDocumentoPrincipalParteProcessoVinculado = processoVinculado.getParte_numero_documento_principal();
+    				String numeroDocumentoPrincipalParteProcessoVinculado = processoVinculado.getParte_numero_documento_principal();
     				pessoaProcessoVinculado.setNumeroDocumentoPrincipal(numeroDocumentoPrincipalParteProcessoVinculado!=null?String.valueOf(numeroDocumentoPrincipalParteProcessoVinculado):null);
     				//   	    	    				tpa.setPessoaVinculada(pessoaParte.get);
     				if (processoVinculado.getParte_sexo()!=null) {
@@ -557,7 +557,7 @@ public class ClientPjeService {
     	processo.setPolo("AT");
     	
     	processo.setParte_nome("Empresa X");
-    	processo.setParte_numero_documento_principal(new BigInteger("51349633000140"));
+    	processo.setParte_numero_documento_principal("51349633000140");
     	processo.setParte_tipo_pessoa(TipoQualificacaoPessoa.JURIDICA.value());
     	processo.setParte_codigo_documento("51349633000140");
     	processo.setParte_emissor_documento("SSP");

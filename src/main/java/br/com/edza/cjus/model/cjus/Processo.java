@@ -81,7 +81,7 @@ public class Processo implements Serializable {
 	private String parte_data_obito;
 
 	@Column(name="parte_numero_documento_principal")
-	private BigInteger parte_numero_documento_principal;
+	private String parte_numero_documento_principal;
 
 	@Column(name="parte_tipo_pessoa")
 	private String parte_tipo_pessoa;
@@ -247,7 +247,7 @@ public class Processo implements Serializable {
 	public Processo(Integer id, String id_manifestante, String senha_manifestante, Integer classe_processual, Integer codigo_localidade,
 					Integer competencia, String modalidade_vinculacao_processo, String prioridade, Double valor_causa, Boolean assistencia_judiciaria, BigInteger nivel_sigilo,
 					String data_ajuizamento, String outro_parametro, String polo, String parte_nome, String parte_sexo, String parte_nome_genitor, String parte_nome_genitora,
-					String parte_data_nascimento, String parte_data_obito, BigInteger parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
+					String parte_data_nascimento, String parte_data_obito, String parte_numero_documento_principal, String parte_tipo_pessoa, String parte_cidade_natural,
 					String parte_estado_natural, String parte_nacionalidade, String parte_codigo_documento, String parte_emissor_documento, String parte_tipo_documento,
 					String parte_nome_detentora, String parte_outro_nome,String endereco_cep, String endereco_logradouro, String endereco_numero, String endereco_complemento,
 					String endereco_bairro, String endereco_cidade, String endereco_estado, String endereco_pais, Boolean repres_processual_intimacao, String repres_processual_nome,
@@ -503,11 +503,11 @@ public class Processo implements Serializable {
 		this.parte_data_obito = parte_data_obito;
 	}
 
-	public BigInteger getParte_numero_documento_principal() {
+	public String getParte_numero_documento_principal() {
 		return parte_numero_documento_principal;
 	}
 
-	public void setParte_numero_documento_principal(BigInteger parte_numero_documento_principal) {
+	public void setParte_numero_documento_principal(String parte_numero_documento_principal) {
 		this.parte_numero_documento_principal = parte_numero_documento_principal;
 	}
 
