@@ -290,7 +290,7 @@ public class ClientPjeService {
 
     				// Polo
     				TipoPoloProcessual poloVinculado = new TipoPoloProcessual();
-       	    		String modalidadeProcessualProcessoVinculado = processo.getPolo();
+       	    		String modalidadeProcessualProcessoVinculado = processoVinculado.getPolo();
         			if (modalidadeProcessualProcessoVinculado!=null) {
         				poloVinculado.setPolo(ModalidadePoloProcessual.fromValue(modalidadeProcessualProcessoVinculado));
         			}	
@@ -302,7 +302,7 @@ public class ClientPjeService {
        				String inscricaoProcessoViculado = processoVinculado.getRepres_processual_inscricao();
        				advProcessoViculado.setInscricao(inscricaoProcessoViculado!=null?inscricaoProcessoViculado:null);
 
-    				String nomeAdvogadoProcessoVinculado = processo.getRepres_processual_nome();
+    				String nomeAdvogadoProcessoVinculado = processoVinculado.getRepres_processual_nome();
     				advProcessoViculado.setNome(nomeAdvogadoProcessoVinculado!=null?nomeAdvogadoProcessoVinculado:null);
        				
     				String numeroDocumentoPrincipalProcessoVinculado = processoVinculado.getRepres_processual_numero_documento_principal();
@@ -361,7 +361,7 @@ public class ClientPjeService {
     				String estadoProcessoVinculado = processoVinculado.getEndereco_estado();
     				endPessoaParteProcessoVinculado.setEstado(estadoProcessoVinculado!=null?estadoProcessoVinculado:null);
 
-    				String logradouroProcessoVinculado = processo.getEndereco_logradouro();
+    				String logradouroProcessoVinculado = processoVinculado.getEndereco_logradouro();
     				endPessoaParteProcessoVinculado.setLogradouro(logradouroProcessoVinculado!=null?logradouroProcessoVinculado:null);
 
     				String numeroProcessoVinculado = processoVinculado.getEndereco_numero();
@@ -391,8 +391,8 @@ public class ClientPjeService {
     				parteProcessoViculado.setPessoa(pessoaProcessoVinculado);
     				parteProcessoViculado.getAdvogado().add(advProcessoViculado);
 
-       	   			if (nomeParteReferencia.equals(pessoaProcessoVinculado.getNome()) && 
-       						nomeAdvReferencia.equals(advProcessoViculado.getNome())) {
+       	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome()) || 
+   						!nomeAdvReferencia.equals(advProcessoViculado.getNome())) {
        	   				poloVinculado.getParte().add(parteProcessoViculado);
        	   				cabecalhoProcesso.getPolo().add(poloVinculado);
        	   			}	
