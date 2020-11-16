@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class CjusApplication {
 
 	public static void main(String[] args) {
+		System.getProperties().put("javax.xml.stream.XMLInputFactory", "br.com.edza.cjus.conf.InputFactory");    
 		SpringApplication.run(CjusApplication.class, args);
 	}
 
