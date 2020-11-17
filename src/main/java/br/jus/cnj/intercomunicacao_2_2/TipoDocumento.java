@@ -13,12 +13,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Tipo de elemento destinado à transferência ou à
- * 				viabilização de transferência de documento processual.
+ * Tipo de elemento destinado ï¿½ transferï¿½ncia ou ï¿½
+ * 				viabilizaï¿½ï¿½o de transferï¿½ncia de documento processual.
  * 
  * <p>Classe Java de tipoDocumento complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteï¿½do esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="tipoDocumento"&gt;
@@ -59,7 +59,7 @@ import javax.xml.bind.annotation.XmlType;
 public class TipoDocumento {
 
     @XmlMimeType("application/octet-stream")
-    protected DataHandler conteudo;
+    protected String conteudo;
     protected List<TipoAssinatura> assinatura;
     protected List<TipoParametro> outroParametro;
     @XmlAnyElement(lax = true)
@@ -87,14 +87,14 @@ public class TipoDocumento {
     protected String tipoDocumentoLocal;
 
     /**
-     * Obtém o valor da propriedade conteudo.
+     * Obtï¿½m o valor da propriedade conteudo.
      * 
      * @return
      *     possible object is
      *     {@link DataHandler }
      *     
      */
-    public DataHandler getConteudo() {
+    public String getConteudo() {
         return conteudo;
     }
 
@@ -106,7 +106,7 @@ public class TipoDocumento {
      *     {@link DataHandler }
      *     
      */
-    public void setConteudo(DataHandler value) {
+    public void setConteudo(String value) {
         this.conteudo = value;
     }
 
@@ -169,7 +169,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade any.
+     * Obtï¿½m o valor da propriedade any.
      * 
      * @return
      *     possible object is
@@ -222,7 +222,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade idDocumento.
+     * Obtï¿½m o valor da propriedade idDocumento.
      * 
      * @return
      *     possible object is
@@ -246,7 +246,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade idDocumentoVinculado.
+     * Obtï¿½m o valor da propriedade idDocumentoVinculado.
      * 
      * @return
      *     possible object is
@@ -270,7 +270,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade tipoDocumento.
+     * Obtï¿½m o valor da propriedade tipoDocumento.
      * 
      * @return
      *     possible object is
@@ -294,7 +294,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade dataHora.
+     * Obtï¿½m o valor da propriedade dataHora.
      * 
      * @return
      *     possible object is
@@ -318,7 +318,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade mimetype.
+     * Obtï¿½m o valor da propriedade mimetype.
      * 
      * @return
      *     possible object is
@@ -342,7 +342,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade nivelSigilo.
+     * Obtï¿½m o valor da propriedade nivelSigilo.
      * 
      * @return
      *     possible object is
@@ -366,7 +366,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade movimento.
+     * Obtï¿½m o valor da propriedade movimento.
      * 
      * @return
      *     possible object is
@@ -390,7 +390,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade hash.
+     * Obtï¿½m o valor da propriedade hash.
      * 
      * @return
      *     possible object is
@@ -414,7 +414,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade descricao.
+     * Obtï¿½m o valor da propriedade descricao.
      * 
      * @return
      *     possible object is
@@ -438,7 +438,7 @@ public class TipoDocumento {
     }
 
     /**
-     * Obtém o valor da propriedade tipoDocumentoLocal.
+     * Obtï¿½m o valor da propriedade tipoDocumentoLocal.
      * 
      * @return
      *     possible object is

@@ -95,8 +95,8 @@ public class ClientPjeService {
    	   	    	TipoDocumento tpDocumento = new TipoDocumento();
    	    		String conteudoDocumento = processo.getConteudo_documento();
    	    		if (conteudoDocumento!=null) {
-   	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
-   	    			tpDocumento.setConteudo(new DataHandler(ds));
+//   	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
+   	    			tpDocumento.setConteudo(conteudoDocumento);
    	    		}	
 	   	   	    
    	    		String dataHoraDocumento = processo.getData_hora_documento();
@@ -251,8 +251,8 @@ public class ClientPjeService {
        	   	    	TipoDocumento tpDocumentoProcessoVinculado = new TipoDocumento();
        	    		String conteudoDocumentoProcessoVinculado = processoVinculado.getConteudo_documento();
        	    		if (conteudoDocumentoProcessoVinculado!=null) {
-       	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
-       	    			tpDocumentoProcessoVinculado.setConteudo(new DataHandler(ds));
+//       	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
+       	    			tpDocumentoProcessoVinculado.setConteudo(conteudoDocumentoProcessoVinculado);
        	    		}	
     	   	   	    
        	    		String dataHoraDocumentoProcessoVinculado = processoVinculado.getData_hora_documento();
