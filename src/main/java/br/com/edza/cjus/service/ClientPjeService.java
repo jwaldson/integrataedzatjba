@@ -151,6 +151,7 @@ public class ClientPjeService {
     			TipoParte parte = new TipoParte();
    				TipoRepresentanteProcessual adv = new TipoRepresentanteProcessual();
    				String inscricao = processo.getRepres_processual_inscricao();
+   				adv.setIntimacao(processo.getRepres_processual_intimacao());
 				adv.setInscricao(inscricao!=null?inscricao:null);
    				String nomeAdvogado = processo.getRepres_processual_nome();
 				adv.setNome(nomeAdvogado!=null?nomeAdvogado:null);
@@ -389,10 +390,9 @@ public class ClientPjeService {
 
     				pessoaProcessoVinculado.getDocumento().add(tdociProcessoVinculado);
     				parteProcessoViculado.setPessoa(pessoaProcessoVinculado);
-    				parteProcessoViculado.getAdvogado().add(advProcessoViculado);
+    				//parteProcessoViculado.getAdvogado().add(advProcessoViculado);
 
-       	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome()) || 
-   						!nomeAdvReferencia.equals(advProcessoViculado.getNome())) {
+       	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome())) {
        	   				poloVinculado.getParte().add(parteProcessoViculado);
        	   				cabecalhoProcesso.getPolo().add(poloVinculado);
        	   			}	
