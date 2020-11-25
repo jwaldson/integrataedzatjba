@@ -165,23 +165,23 @@ public class ClientPjeService {
 				TipoEndereco enderecoAdvogado = new TipoEndereco();
 				
 				//Verificar
-//   				String bairro = processo.getgetBairro();
-//   				enderecoAdvogado.setBairro(bairro!=null?bairro:null);
-//				String cep = advogado.getCep();
-//				enderecoAdvogado.setCep(cep!=null?cep:null);
-//			    String cidade = advogado.getCidade();
-//				enderecoAdvogado.setCidade(cidade!=null?cidade:null);
-//				String complemento = advogado.getComplemento();
-//				enderecoAdvogado.setComplemento(complemento!=null?complemento:null);
-//				String estado = advogado.getEstado();
-//				enderecoAdvogado.setEstado(estado!=null?estado:null);
-//				String logradouro = advogado.getLogradouro();
-//				enderecoAdvogado.setLogradouro(logradouro!=null?logradouro:null);
-//				String numero = advogado.getNumero();
-//				enderecoAdvogado.setNumero(numero!=null?numero:null);
-//				String pais = advogado.getPais();
-//				enderecoAdvogado.setPais(pais!=null?pais:null);
-//				dv.getEndereco().add(enderecoAdvogado);	
+   				String bairroAdv = "NOVA BRASILIA";
+   				enderecoAdvogado.setBairro(bairroAdv!=null?bairroAdv:null);
+				String cepAdv = "43820210";
+				enderecoAdvogado.setCep(cepAdv!=null?cepAdv:null);
+			    String cidadeAdv = "CANDEIAS";
+				enderecoAdvogado.setCidade(cidadeAdv!=null?cidadeAdv:null);
+				String complementoAdv = " ";
+				enderecoAdvogado.setComplemento(complementoAdv!=null?complementoAdv:null);
+				String estadoAdv = "BA";
+				enderecoAdvogado.setEstado(estadoAdv!=null?estadoAdv:null);
+				String logradouroAdv = "RUA MIGUEL CALMON";
+				enderecoAdvogado.setLogradouro(logradouroAdv!=null?logradouroAdv:null);
+				String numeroAdv = "226";
+				enderecoAdvogado.setNumero(numeroAdv!=null?numeroAdv:null);
+				String paisAdv = "BR";
+				enderecoAdvogado.setPais(paisAdv!=null?paisAdv:null);
+				adv.getEndereco().add(enderecoAdvogado);	
 				
 				TipoPessoa pessoa = new TipoPessoa();
 				String cidadeNatural = processo.getParte_cidade_natural();
