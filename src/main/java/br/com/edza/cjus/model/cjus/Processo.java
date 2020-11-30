@@ -176,6 +176,12 @@ public class Processo implements Serializable {
 	@Column(name="data_hora_documento")
 	private String data_hora_documento;
 
+	@Column(name="numero_cda")
+	private String numeroCda;
+	
+	@Column(name="data_constituicao_credito")
+	private String dataConstituicaoCredito;
+	
 	@Column(name="descricao_documento")
 	private String descricao_documento;
 
@@ -925,6 +931,22 @@ public class Processo implements Serializable {
 
 	public void setProcessoid(Integer processoid) {
 		this.processoid = processoid;
+	}
+
+	public String getNumeroCda() {
+		return numeroCda;
+	}
+
+	public void setNumeroCda(String numeroCda) {
+		this.numeroCda = numeroCda;
+	}
+
+	public String getDataConstituicaoCredito() {
+		return dataConstituicaoCredito;
+	}
+
+	public void setDataConstituicaoCredito(String dataConstituicaoCredito) {
+		this.dataConstituicaoCredito = dataConstituicaoCredito;
 	}
 
 }

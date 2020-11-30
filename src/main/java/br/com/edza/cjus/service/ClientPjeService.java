@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -35,6 +34,7 @@ import br.jus.cnj.intercomunicacao_2_2.TipoCabecalhoProcesso;
 import br.jus.cnj.intercomunicacao_2_2.TipoDocumento;
 import br.jus.cnj.intercomunicacao_2_2.TipoDocumentoIdentificacao;
 import br.jus.cnj.intercomunicacao_2_2.TipoEndereco;
+import br.jus.cnj.intercomunicacao_2_2.TipoParametro;
 import br.jus.cnj.intercomunicacao_2_2.TipoParte;
 import br.jus.cnj.intercomunicacao_2_2.TipoPessoa;
 import br.jus.cnj.intercomunicacao_2_2.TipoPoloProcessual;
@@ -70,8 +70,9 @@ public class ClientPjeService {
 
    	   		TipoEntregarManifestacaoProcessual manifestaaoProcessual = new TipoEntregarManifestacaoProcessual();
 
-   	   		try {
-	   	   		manifestaaoProcessual.setDataEnvio(new SimpleDateFormat("yyyyMMdd").format(Timestamp.valueOf(LocalDateTime.now())));
+   	   		LocalDateTime now = LocalDateTime.now();
+			try {
+	   	   		manifestaaoProcessual.setDataEnvio(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
 	   	   		manifestaaoProcessual.setIdManifestante(processo.getId_manifestante());
 //	   	   		String numeroProcesso = processo.getNumeroProcesso();
 
@@ -98,7 +99,9 @@ public class ClientPjeService {
 //   	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
    	    			tpDocumento.setConteudo(conteudoDocumento);
    	    		}	
-	   	   	    
+   	    		Integer idDoc = 1;
+   	    		tpDocumento.setIdDocumento(idDoc.toString());
+   	    		tpDocumento.setMovimento(0);
    	    		String dataHoraDocumento = processo.getData_hora_documento();
 	   	   	    if (dataHoraDocumento !=null) {
 	   	   	    	tpDocumento.setDataHora(dataHoraDocumento);
@@ -255,7 +258,9 @@ public class ClientPjeService {
 //       	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
        	    			tpDocumentoProcessoVinculado.setConteudo(conteudoDocumentoProcessoVinculado);
        	    		}	
-    	   	   	    
+       	    		idDoc++;
+       	    		tpDocumentoProcessoVinculado.setIdDocumento(idDoc.toString());
+       	    		tpDocumentoProcessoVinculado.setMovimento(0);
        	    		String dataHoraDocumentoProcessoVinculado = processoVinculado.getData_hora_documento();
     	   	   	    if (dataHoraDocumentoProcessoVinculado !=null) {
     	   	   	    	tpDocumentoProcessoVinculado.setDataHora(dataHoraDocumentoProcessoVinculado);
@@ -401,8 +406,31 @@ public class ClientPjeService {
        	   		
     			}
     			//
-
+    			TipoParametro tp1 = new TipoParametro();
+    			String numeroCda = processo.getNumeroCda();
+    			if (numeroCda != null) {
+	    			tp1.setNome("Nº da CDA");
+	    			tp1.setValor(numeroCda);
+	    			manifestaaoProcessual.getParametros().add(tp1);
+    			}	
+    			TipoParametro tp2 = new TipoParametro();
+    			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
+    			if (dataConstituicaoCredito!=null) {
+	     			tp2.setNome("Data da Constituição Definitiva do Crédito");
+	    			tp2.setValor(dataConstituicaoCredito);
+	    			manifestaaoProcessual.getParametros().add(tp2);
+    			}	
+    			TipoParametro tp3 = new TipoParametro();
+    			tp3.setNome("mni:pje:identificadorExterno");
+    			//202000000001
+    			tp3.setValor(new SimpleDateFormat("yyyyMM").format(Timestamp.valueOf(now)) + String.format("%06d", processo.getId()));
+    			manifestaaoProcessual.getParametros().add(tp3);
+    			
+    			cabecalhoProcesso.setNumero("00000000000000000000");
+    			cabecalhoProcesso.setCompetencia(6);
+    			cabecalhoProcesso.setIntervencaoMP(false);
    				manifestaaoProcessual.setDadosBasicos(cabecalhoProcesso);
+   				
 	   	
    	   	    	TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual = pjeService.entregarManifestacaoProcessual(manifestaaoProcessual);
    	   	    	if (entregarManifestacaoProcessual!=null) {
@@ -412,7 +440,7 @@ public class ClientPjeService {
 					} else {
 						processo.setEntra_status_processamento("03");
 					}
-	   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(LocalDateTime.now())));
+	   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
 					processo.setRetorno_sucesso(sucesso);
 	   	   	    	String protocoloRecebimento = entregarManifestacaoProcessual.getProtocoloRecebimento();
 	   	   	    	if (protocoloRecebimento!=null) {
@@ -447,7 +475,7 @@ public class ClientPjeService {
 	   	 	    	processo.setSai_erro_sistema("Serviço não retornado");
 	   	 	    }
 	   	    	    
-   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(LocalDateTime.now())));
+   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
 	   	   	    	
    	   	    	repository.save(processo);
 	         }  
@@ -457,7 +485,7 @@ public class ClientPjeService {
    	 	       	processo.setSai_erro_sistema(errors.toString());
    	    	    processo.setEntra_status_processamento("99");
    	    	    processo.setRetorno_sucesso(false);
-   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(LocalDateTime.now())));
+   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
     		    repository.save(processo);
     		    repository.flush();
    	 	    }

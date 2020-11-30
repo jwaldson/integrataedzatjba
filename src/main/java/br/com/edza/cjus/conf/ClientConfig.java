@@ -21,7 +21,7 @@ public class ClientConfig  {
         JaxWsProxyFactoryBean jaxws = new JaxWsProxyFactoryBean();
         // https://wwwh.cnj.jus.br/pjemni-2x/intercomunicacao?wsdl
         //https://pje1g-integracao.tjba.jus.br/pje-web/intercomunicacao
-        jaxws.setAddress("https://pje1g-integracao.tjba.jus.br/pje-web/intercomunicacao");
+        jaxws.setAddress("https://pje1g-mni.tjba.jus.br/pje-web/intercomunicacao");
         jaxws.setServiceClass(ServicoIntercomunicacao222.class);
         ServicoIntercomunicacao222 result = (ServicoIntercomunicacao222)jaxws.create();
           
