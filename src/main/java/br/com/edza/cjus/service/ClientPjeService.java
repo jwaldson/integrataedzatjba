@@ -174,7 +174,7 @@ public class ClientPjeService {
 				enderecoAdvogado.setCep(cepAdv!=null?cepAdv:null);
 			    String cidadeAdv = "CANDEIAS";
 				enderecoAdvogado.setCidade(cidadeAdv!=null?cidadeAdv:null);
-				String complementoAdv = " ";
+				String complementoAdv = "";
 				enderecoAdvogado.setComplemento(complementoAdv!=null?complementoAdv:null);
 				String estadoAdv = "BA";
 				enderecoAdvogado.setEstado(estadoAdv!=null?estadoAdv:null);
@@ -182,7 +182,7 @@ public class ClientPjeService {
 				enderecoAdvogado.setLogradouro(logradouroAdv!=null?logradouroAdv:null);
 				String numeroAdv = "226";
 				enderecoAdvogado.setNumero(numeroAdv!=null?numeroAdv:null);
-				String paisAdv = "BR";
+				String paisAdv = "BRASIL";
 				enderecoAdvogado.setPais(paisAdv!=null?paisAdv:null);
 				adv.getEndereco().add(enderecoAdvogado);	
 				
