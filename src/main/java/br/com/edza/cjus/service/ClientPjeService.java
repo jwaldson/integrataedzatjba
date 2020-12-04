@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.cxf.helpers.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -399,14 +400,14 @@ public class ClientPjeService {
     				
     				// Parametros
         			TipoParametro tp4 = new TipoParametro();
-        			String numeroCda = processo.getNumeroCda();
+        			String numeroCda = processoVinculado.getNumeroCda();
         			if (numeroCda != null) {
     	    			tp4.setNome("Nº da CDA");
     	    			tp4.setValor(numeroCda);
     	    			manifestaaoProcessual.getParametros().add(tp4);
         			}	
         			TipoParametro tp5 = new TipoParametro();
-        			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
+        			String dataConstituicaoCredito = processoVinculado.getDataConstituicaoCredito();
         			if (dataConstituicaoCredito!=null) {
     	     			tp5.setNome("Data da Constituição Definitiva do Crédito");
     	    			tp5.setValor(dataConstituicaoCredito);
@@ -500,6 +501,24 @@ public class ClientPjeService {
 			catch (SocketTimeoutException ex) {
    	 	       	StringWriter errors = new StringWriter();
    	 	       	ex.printStackTrace(new PrintWriter(errors));
+   	 	       	int tentativa=1;
+   	 	       	String sai_erro_sistema = processo.getSai_erro_sistema();
+       			processo.setEntra_status_processamento("00");
+				if (sai_erro_sistema !=null && sai_erro_sistema.indexOf("Timeout Tentativa:") > -1) {
+   	 	       		tentativa = Integer.parseInt(sai_erro_sistema.substring(sai_erro_sistema.indexOf("Timeout Tentativa:")+19))+1;
+   	 	       		if (tentativa>9) {
+   	    	    	    processo.setEntra_status_processamento("98");
+   	 	       		}
+				}
+   	 	       	processo.setSai_erro_sistema("Timeout Tentativa: " + tentativa);
+   	    	    processo.setRetorno_sucesso(false);
+   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
+    		    repository.save(processo);
+    		    repository.flush();
+			}
+			catch (SOAPFaultException ex) {
+   	 	       	StringWriter errors = new StringWriter();
+   	 	       	ex.printStackTrace();
    	 	       	int tentativa=1;
    	 	       	String sai_erro_sistema = processo.getSai_erro_sistema();
        			processo.setEntra_status_processamento("00");
