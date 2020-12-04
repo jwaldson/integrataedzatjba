@@ -3,6 +3,7 @@ package br.com.edza.cjus.service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigInteger;
+import java.net.SocketTimeoutException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -395,17 +396,34 @@ public class ClientPjeService {
 
     				pessoaProcessoVinculado.getDocumento().add(tdociProcessoVinculado);
     				parteProcessoViculado.setPessoa(pessoaProcessoVinculado);
+    				
+    				// Parametros
+        			TipoParametro tp4 = new TipoParametro();
+        			String numeroCda = processo.getNumeroCda();
+        			if (numeroCda != null) {
+    	    			tp4.setNome("Nº da CDA");
+    	    			tp4.setValor(numeroCda);
+    	    			manifestaaoProcessual.getParametros().add(tp4);
+        			}	
+        			TipoParametro tp5 = new TipoParametro();
+        			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
+        			if (dataConstituicaoCredito!=null) {
+    	     			tp5.setNome("Data da Constituição Definitiva do Crédito");
+    	    			tp5.setValor(dataConstituicaoCredito);
+    	    			manifestaaoProcessual.getParametros().add(tp5);
+        			}	
+    				
     				//parteProcessoViculado.getAdvogado().add(advProcessoViculado);
 
        	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome())) {
        	   				poloVinculado.getParte().add(parteProcessoViculado);
        	   				cabecalhoProcesso.getPolo().add(poloVinculado);
        	   			}	
-       	   		nomeParteReferencia=pessoaProcessoVinculado.getNome();
-       	   		nomeAdvReferencia=advProcessoViculado.getNome();
+       	   			nomeParteReferencia=pessoaProcessoVinculado.getNome();
+       	   			nomeAdvReferencia=advProcessoViculado.getNome();
        	   		
     			}
-    			//
+    			// Parametros
     			TipoParametro tp1 = new TipoParametro();
     			String numeroCda = processo.getNumeroCda();
     			if (numeroCda != null) {
@@ -479,6 +497,24 @@ public class ClientPjeService {
 	   	   	    	
    	   	    	repository.save(processo);
 	         }  
+			catch (SocketTimeoutException ex) {
+   	 	       	StringWriter errors = new StringWriter();
+   	 	       	ex.printStackTrace(new PrintWriter(errors));
+   	 	       	int tentativa=1;
+   	 	       	String sai_erro_sistema = processo.getSai_erro_sistema();
+       			processo.setEntra_status_processamento("00");
+				if (sai_erro_sistema !=null && sai_erro_sistema.indexOf("Timeout Tentativa:") > -1) {
+   	 	       		tentativa = Integer.parseInt(sai_erro_sistema.substring(sai_erro_sistema.indexOf("Timeout Tentativa:")+19))+1;
+   	 	       		if (tentativa>9) {
+   	    	    	    processo.setEntra_status_processamento("98");
+   	 	       		}
+				}
+   	 	       	processo.setSai_erro_sistema("Timeout Tentativa: " + tentativa);
+   	    	    processo.setRetorno_sucesso(false);
+   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
+    		    repository.save(processo);
+    		    repository.flush();
+			}
    	   	   	catch (Exception ex) {
    	 	       	StringWriter errors = new StringWriter();
    	 	       	ex.printStackTrace(new PrintWriter(errors));
