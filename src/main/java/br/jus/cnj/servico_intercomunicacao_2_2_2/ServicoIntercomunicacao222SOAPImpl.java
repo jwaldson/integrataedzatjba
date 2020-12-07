@@ -31,9 +31,6 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public void consultarAlteracao(java.lang.String idConsultante, java.lang.String senhaConsultante, java.lang.String numeroProcesso, javax.xml.ws.Holder<java.lang.Boolean> sucesso, javax.xml.ws.Holder<java.lang.String> mensagem, javax.xml.ws.Holder<java.lang.String> hashCabecalho, javax.xml.ws.Holder<java.lang.String> hashMovimentacoes, javax.xml.ws.Holder<java.lang.String> hashDocumentos) {
         LOG.info("Executing operation consultarAlteracao");
-        System.out.println(idConsultante);
-        System.out.println(senhaConsultante);
-        System.out.println(numeroProcesso);
         try {
             java.lang.Boolean sucessoValue = null;
             sucesso.value = sucessoValue;
@@ -56,10 +53,6 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public void consultarAvisosPendentes(java.lang.String idRepresentado, java.lang.String idConsultante, java.lang.String senhaConsultante, java.lang.String dataReferencia, javax.xml.ws.Holder<java.lang.Boolean> sucesso, javax.xml.ws.Holder<java.lang.String> mensagem, javax.xml.ws.Holder<java.util.List<br.jus.cnj.intercomunicacao_2_2.TipoAvisoComunicacaoPendente>> aviso) {
         LOG.info("Executing operation consultarAvisosPendentes");
-        System.out.println(idRepresentado);
-        System.out.println(idConsultante);
-        System.out.println(senhaConsultante);
-        System.out.println(dataReferencia);
         try {
             java.lang.Boolean sucessoValue = null;
             sucesso.value = sucessoValue;
@@ -78,9 +71,6 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public void confirmarRecebimento(java.lang.String idRecebedor, java.lang.String senhaRecebedor, java.lang.String protocolo, javax.xml.ws.Holder<java.lang.Boolean> sucesso, javax.xml.ws.Holder<java.lang.String> mensagem) {
         LOG.info("Executing operation confirmarRecebimento");
-        System.out.println(idRecebedor);
-        System.out.println(senhaRecebedor);
-        System.out.println(protocolo);
         try {
             java.lang.Boolean sucessoValue = null;
             sucesso.value = sucessoValue;
@@ -97,7 +87,6 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarTeorComunicacaoResposta consultarTeorComunicacao(br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarTeorComunicacao parameters) {
         LOG.info("Executing operation consultarTeorComunicacao");
-        System.out.println(parameters);
         try {
             br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarTeorComunicacaoResposta _return = null;
             return _return;
@@ -112,12 +101,10 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarProcessoResposta consultarProcesso(br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarProcesso parameters) {
         LOG.info("Executing operation consultarProcesso");
-        System.out.println(parameters);
         try {
             br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoConsultarProcessoResposta _return = null;
             return _return;
         } catch (java.lang.Exception ex) {
-            ex.printStackTrace();
             throw new RuntimeException(ex);
         }
     }
@@ -127,7 +114,6 @@ public class ServicoIntercomunicacao222SOAPImpl implements ServicoIntercomunicac
      */
     public br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoEntregarManifestacaoProcessualResposta entregarManifestacaoProcessual(br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoEntregarManifestacaoProcessual parameters) {
         LOG.info("Executing operation entregarManifestacaoProcessual");
-        System.out.println(parameters);
         try {
             br.jus.cnj.tipos_servico_intercomunicacao_2_2.TipoEntregarManifestacaoProcessualResposta _return = null;
             return _return;

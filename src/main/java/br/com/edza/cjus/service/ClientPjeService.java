@@ -506,7 +506,7 @@ public class ClientPjeService {
    	 	       	StringWriter errors = new StringWriter();
    	 	       	ex.printStackTrace(new PrintWriter(errors));
    	 	       	int tentativa=1;
-   	 	       	String sai_erro_sistema = processo.getSai_erro_sistema();
+   	 	       	String sai_erro_sistema = processo.getSai_conteudo_retornado();
        			processo.setEntra_status_processamento("00");
 				if (sai_erro_sistema !=null && sai_erro_sistema.indexOf("Timeout Tentativa:") > -1) {
    	 	       		tentativa = Integer.parseInt(sai_erro_sistema.substring(sai_erro_sistema.indexOf("Timeout Tentativa:")+19))+1;
@@ -514,25 +514,7 @@ public class ClientPjeService {
    	    	    	    processo.setEntra_status_processamento("98");
    	 	       		}
 				}
-   	 	       	processo.setSai_erro_sistema("Timeout Tentativa: " + tentativa);
-   	    	    processo.setRetorno_sucesso(false);
-   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
-    		    repository.save(processo);
-    		    repository.flush();
-			}
-			catch (SOAPFaultException ex) {
-   	 	       	StringWriter errors = new StringWriter();
-   	 	       	ex.printStackTrace();
-   	 	       	int tentativa=1;
-   	 	       	String sai_erro_sistema = processo.getSai_erro_sistema();
-       			processo.setEntra_status_processamento("00");
-				if (sai_erro_sistema !=null && sai_erro_sistema.indexOf("Timeout Tentativa:") > -1) {
-   	 	       		tentativa = Integer.parseInt(sai_erro_sistema.substring(sai_erro_sistema.indexOf("Timeout Tentativa:")+19))+1;
-   	 	       		if (tentativa>9) {
-   	    	    	    processo.setEntra_status_processamento("98");
-   	 	       		}
-				}
-   	 	       	processo.setSai_erro_sistema("Timeout Tentativa: " + tentativa);
+   	 	       	processo.setSai_conteudo_retornado("Timeout Tentativa: " + tentativa);
    	    	    processo.setRetorno_sucesso(false);
    	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
     		    repository.save(processo);
@@ -541,8 +523,21 @@ public class ClientPjeService {
    	   	   	catch (Exception ex) {
    	 	       	StringWriter errors = new StringWriter();
    	 	       	ex.printStackTrace(new PrintWriter(errors));
-   	 	       	processo.setSai_erro_sistema(errors.toString());
-   	    	    processo.setEntra_status_processamento("99");
+   	 	       	if (errors.toString().indexOf("Timeout")>-1) {
+   	   	 	       	int tentativa=1;
+   	   	 	       	String sai_erro_sistema = processo.getSai_conteudo_retornado();
+   	       			processo.setEntra_status_processamento("00");
+   					if (sai_erro_sistema !=null && sai_erro_sistema.indexOf("Timeout Tentativa:") > -1) {
+   	   	 	       		tentativa = Integer.parseInt(sai_erro_sistema.substring(sai_erro_sistema.indexOf("Timeout Tentativa:")+19))+1;
+   	   	 	       		if (tentativa>9) {
+   	   	    	    	    processo.setEntra_status_processamento("98");
+   	   	 	       		}
+   					}
+   	   	 	       	processo.setSai_conteudo_retornado("Timeout Tentativa: " + tentativa);
+   	 	       	} else {
+	   	 	       	processo.setSai_erro_sistema(errors.toString());
+	   	    	    processo.setEntra_status_processamento("99");
+   	 	       	}   
    	    	    processo.setRetorno_sucesso(false);
    	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
     		    repository.save(processo);
