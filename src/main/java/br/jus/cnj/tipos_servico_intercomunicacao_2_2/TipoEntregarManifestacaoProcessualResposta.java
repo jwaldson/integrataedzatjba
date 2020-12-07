@@ -63,7 +63,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
     @XmlElement(required = true)
     protected String dataOperacao;
     @XmlMimeType("application/octet-stream")
-    protected DataHandler recibo;
+    protected String recibo;
     protected List<TipoParametro> parametro;
 
     /**
@@ -162,7 +162,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
      *     {@link DataHandler }
      *     
      */
-    public DataHandler getRecibo() {
+    public String getRecibo() {
         return recibo;
     }
 
@@ -174,7 +174,7 @@ public class TipoEntregarManifestacaoProcessualResposta {
      *     {@link DataHandler }
      *     
      */
-    public void setRecibo(DataHandler value) {
+    public void setRecibo(String value) {
         this.recibo = value;
     }
 

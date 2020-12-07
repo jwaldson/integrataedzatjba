@@ -477,11 +477,8 @@ public class ClientPjeService {
 	   	   	    	if (mensagem !=null) {
 	   	   	    		processo.setRetorno_mensagem(mensagem);
 	   	   	    	}	
-	   	   	    	DataHandler recibo = entregarManifestacaoProcessual.getRecibo();
-	   	   	    	if (recibo !=null) {
-	   	   	    		String ds = IOUtils.toString(recibo.getInputStream());
-	   	   	    		processo.setRetorno_recibo(ds);
-	   	   	    	}	
+	   	   	    	String recibo = entregarManifestacaoProcessual.getRecibo();
+   	   	    		processo.setRetorno_recibo(recibo);
 	   	 	       	processo.setSai_erro_sistema(null);
 	   	 	       	
 		       		String conteudoRetornado = null;
@@ -501,6 +498,7 @@ public class ClientPjeService {
    	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
 	   	   	    	
    	   	    	repository.save(processo);
+   	   	    	repository.flush();
 	         }  
 			catch (SocketTimeoutException ex) {
    	 	       	StringWriter errors = new StringWriter();
