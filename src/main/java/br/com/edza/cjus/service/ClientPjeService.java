@@ -120,7 +120,7 @@ public class ClientPjeService {
 				tpDocumento.setNivelSigilo(nivelSigiloDocumento!=null?nivelSigiloDocumento:null);
 	   	   	    String tipoDocumento = processo.getTipo_documento();
 				tpDocumento.setTipoDocumento(tipoDocumento!=null?tipoDocumento:null);
-				tpDocumento.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
+//				tpDocumento.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
    	   	    	TipoAssinatura tpAssinatura = new TipoAssinatura();
    	   	    	String algoritmoHashAssinatura = processo.getAlgoritmo_hash_assinatura();
 				tpAssinatura.setAlgoritmoHash(algoritmoHashAssinatura!=null?algoritmoHashAssinatura:null);
@@ -399,21 +399,23 @@ public class ClientPjeService {
     				parteProcessoViculado.setPessoa(pessoaProcessoVinculado);
     				
     				// Parametros
-        			TipoParametro tp4 = new TipoParametro();
-        			String numeroCda = processoVinculado.getNumeroCda();
-        			if (numeroCda != null) {
-    	    			tp4.setNome("Nº da CDA");
-    	    			tp4.setValor(numeroCda);
-    	    			manifestaaoProcessual.getParametros().add(tp4);
-        			}	
-        			TipoParametro tp5 = new TipoParametro();
-        			String dataConstituicaoCredito = processoVinculado.getDataConstituicaoCredito();
-        			if (dataConstituicaoCredito!=null) {
-    	     			tp5.setNome("Data da Constituição Definitiva do Crédito");
-    	    			tp5.setValor(dataConstituicaoCredito);
-    	    			manifestaaoProcessual.getParametros().add(tp5);
-        			}	
-    				
+        			if (!processoVinculado.getTipo_documento().equals("58") ) {
+
+	    				TipoParametro tp4 = new TipoParametro();
+	        			String numeroCda = processoVinculado.getNumeroCda();
+	        			if (numeroCda != null) {
+	    	    			tp4.setNome("Nº da CDA");
+	    	    			tp4.setValor(numeroCda);
+	    	    			manifestaaoProcessual.getParametros().add(tp4);
+	        			}	
+	        			TipoParametro tp5 = new TipoParametro();
+	        			String dataConstituicaoCredito = processoVinculado.getDataConstituicaoCredito();
+	        			if (dataConstituicaoCredito!=null) {
+	    	     			tp5.setNome("Data da Constituição Definitiva do Crédito");
+	    	    			tp5.setValor(dataConstituicaoCredito);
+	    	    			manifestaaoProcessual.getParametros().add(tp5);
+	        			}	
+        			}
     				//parteProcessoViculado.getAdvogado().add(advProcessoViculado);
 
        	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome())) {
@@ -425,19 +427,21 @@ public class ClientPjeService {
        	   		
     			}
     			// Parametros
-    			TipoParametro tp1 = new TipoParametro();
-    			String numeroCda = processo.getNumeroCda();
-    			if (numeroCda != null) {
-	    			tp1.setNome("Nº da CDA");
-	    			tp1.setValor(numeroCda);
-	    			manifestaaoProcessual.getParametros().add(tp1);
-    			}	
-    			TipoParametro tp2 = new TipoParametro();
-    			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
-    			if (dataConstituicaoCredito!=null) {
-	     			tp2.setNome("Data da Constituição Definitiva do Crédito");
-	    			tp2.setValor(dataConstituicaoCredito);
-	    			manifestaaoProcessual.getParametros().add(tp2);
+    			if (!processo.getTipo_documento().equals("58") ) {
+	    			TipoParametro tp1 = new TipoParametro();
+	    			String numeroCda = processo.getNumeroCda();
+	    			if (numeroCda != null) {
+		    			tp1.setNome("Nº da CDA");
+		    			tp1.setValor(numeroCda);
+		    			manifestaaoProcessual.getParametros().add(tp1);
+	    			}	
+	    			TipoParametro tp2 = new TipoParametro();
+	    			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
+	    			if (dataConstituicaoCredito!=null) {
+		     			tp2.setNome("Data da Constituição Definitiva do Crédito");
+		    			tp2.setValor(dataConstituicaoCredito);
+		    			manifestaaoProcessual.getParametros().add(tp2);
+	    			}	
     			}	
     			TipoParametro tp3 = new TipoParametro();
     			tp3.setNome("mni:pje:identificadorExterno");
