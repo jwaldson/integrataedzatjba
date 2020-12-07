@@ -24,7 +24,7 @@ public interface ProcessoRepository extends JpaRepository<Processo, Integer>{
 			"					c.nivel_sigilo_documento, c.tipo_documento, c.conteudo_documento, c.mimetype_documento, c.assinatura, c.algoritmo_hash_assinatura,\n" + 
 			"					c.cadeia_certificado_assinatura, c.codificacao_certificado_assinatura, c.dataassinatura, c.signatariologin, c.retorno_sucesso, \n" + 
 			"					c.retorno_mensagem, c.retorno_protocolo_recebimento, c.retorno_data_operacao, c.retorno_recibo, c.sai_conteudo_retornado, \n" + 
-			"					c.sai_data_atualizacao_registro, c.sai_erro_sistema, c.processoid) FROM Processo c WHERE c.entra_status_processamento = '00' order by c.id ASC")
+			"					c.sai_data_atualizacao_registro, c.sai_erro_sistema, c.processoid, c.dataConstituicaoCredito, c.numeroCda) FROM Processo c WHERE c.entra_status_processamento = '00' order by c.id ASC")
 		List<Processo> consultaRegistrosProcessar();
 
 	@Query("SELECT new br.com.edza.cjus.model.cjus.Processo(c.id, c.id_manifestante, c.senha_manifestante, c.classe_processual, c.codigo_localidade,\n" + 
@@ -40,7 +40,7 @@ public interface ProcessoRepository extends JpaRepository<Processo, Integer>{
 			"					c.nivel_sigilo_documento, c.tipo_documento, c.conteudo_documento, c.mimetype_documento, c.assinatura, c.algoritmo_hash_assinatura,\n" + 
 			"					c.cadeia_certificado_assinatura, c.codificacao_certificado_assinatura, c.dataassinatura, c.signatariologin, c.retorno_sucesso, \n" + 
 			"					c.retorno_mensagem, c.retorno_protocolo_recebimento, c.retorno_data_operacao, c.retorno_recibo, c.sai_conteudo_retornado, \n" + 
-			"					c.sai_data_atualizacao_registro, c.sai_erro_sistema, c.processoid) FROM Processo c WHERE c.entra_status_processamento = '88' and c.processoid = :processoid order by c.id ASC")
+			"					c.sai_data_atualizacao_registro, c.sai_erro_sistema, c.processoid, c.dataConstituicaoCredito, c.numeroCda) FROM Processo c WHERE c.entra_status_processamento = '88' and c.processoid = :processoid order by c.id ASC")
 		List<Processo> consultaRegistrosvinculados(@Param("processoid") Integer processoid);
 
 	

@@ -263,7 +263,7 @@ public class Processo implements Serializable {
 					Integer nivel_sigilo_documento, String tipo_documento, String conteudo_documento, String mimetype_documento, String assinatura, String algoritmo_hash_assinatura,
 					String cadeia_certificado_assinatura, String codificacao_certificado_assinatura, String dataassinatura, String signatariologin, Boolean retorno_sucesso, 
 					String retorno_mensagem, BigInteger retorno_protocolo_recebimento, String retorno_data_operacao, String retorno_recibo, String sai_conteudo_retornado, 
-					String sai_data_atualizacao_registro, String sai_erro_sistema, Integer processoid)
+					String sai_data_atualizacao_registro, String sai_erro_sistema, Integer processoid, String dataConstituicaoCredito, String numeroCda)
 
  {
 		  this.id=id;
@@ -339,6 +339,8 @@ public class Processo implements Serializable {
 		  this.sai_data_atualizacao_registro=sai_data_atualizacao_registro;
 		  this.sai_erro_sistema=sai_erro_sistema;
 		  this.processoid=processoid;
+		  this.dataConstituicaoCredito=dataConstituicaoCredito;
+		  this.numeroCda=numeroCda; 
 	}
 
 	public Integer getId() {
