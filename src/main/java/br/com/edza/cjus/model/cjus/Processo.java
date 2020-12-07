@@ -225,7 +225,7 @@ public class Processo implements Serializable {
 	private String retorno_mensagem;
 
 	@Column(name="retorno_protocolo_recebimento")
-	private BigInteger retorno_protocolo_recebimento;
+	private String retorno_protocolo_recebimento;
 
 	@Column(name="retorno_data_operacao")
 	private String retorno_data_operacao;
@@ -262,7 +262,7 @@ public class Processo implements Serializable {
 					String id_documento, String id_documento_vinculado, String tipo_documento_consultapje, String data_hora_documento, String descricao_documento, String hash_documento,
 					Integer nivel_sigilo_documento, String tipo_documento, String conteudo_documento, String mimetype_documento, String assinatura, String algoritmo_hash_assinatura,
 					String cadeia_certificado_assinatura, String codificacao_certificado_assinatura, String dataassinatura, String signatariologin, Boolean retorno_sucesso, 
-					String retorno_mensagem, BigInteger retorno_protocolo_recebimento, String retorno_data_operacao, String retorno_recibo, String sai_conteudo_retornado, 
+					String retorno_mensagem, String retorno_protocolo_recebimento, String retorno_data_operacao, String retorno_recibo, String sai_conteudo_retornado, 
 					String sai_data_atualizacao_registro, String sai_erro_sistema, Integer processoid, String dataConstituicaoCredito, String numeroCda)
 
  {
@@ -879,11 +879,11 @@ public class Processo implements Serializable {
 		this.retorno_mensagem = retorno_mensagem;
 	}
 
-	public BigInteger getRetorno_protocolo_recebimento() {
+	public String getRetorno_protocolo_recebimento() {
 		return retorno_protocolo_recebimento;
 	}
 
-	public void setRetorno_protocolo_recebimento(BigInteger retorno_protocolo_recebimento) {
+	public void setRetorno_protocolo_recebimento(String retorno_protocolo_recebimento) {
 		this.retorno_protocolo_recebimento = retorno_protocolo_recebimento;
 	}
 

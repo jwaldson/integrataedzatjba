@@ -467,7 +467,7 @@ public class ClientPjeService {
 					processo.setRetorno_sucesso(sucesso);
 	   	   	    	String protocoloRecebimento = entregarManifestacaoProcessual.getProtocoloRecebimento();
 	   	   	    	if (protocoloRecebimento!=null) {
-	   	   	    		processo.setRetorno_protocolo_recebimento(new BigInteger(protocoloRecebimento));
+	   	   	    		processo.setRetorno_protocolo_recebimento(protocoloRecebimento);
 	   	   	    	}	
 	   	   	    	String dataOperacao = entregarManifestacaoProcessual.getDataOperacao();
 	   	   	    	if (dataOperacao != null) {
