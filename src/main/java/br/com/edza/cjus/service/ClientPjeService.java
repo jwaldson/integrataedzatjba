@@ -119,7 +119,6 @@ public class ClientPjeService {
 				tpDocumento.setNivelSigilo(nivelSigiloDocumento!=null?nivelSigiloDocumento:null);
 	   	   	    String tipoDocumento = processo.getTipo_documento();
 				tpDocumento.setTipoDocumento(tipoDocumento!=null?tipoDocumento:null);
-//				tpDocumento.setTipoDocumentoLocal(tipoDocumento!=null?tipoDocumento:null);
    	   	    	TipoAssinatura tpAssinatura = new TipoAssinatura();
    	   	    	String algoritmoHashAssinatura = processo.getAlgoritmo_hash_assinatura();
 				tpAssinatura.setAlgoritmoHash(algoritmoHashAssinatura!=null?algoritmoHashAssinatura:null);
@@ -134,7 +133,8 @@ public class ClientPjeService {
     				tpAssinatura.setDataAssinatura(dataAssinatura);
     			}	
     			tpDocumento.getAssinatura().add(tpAssinatura);
-   	    		manifestaaoProcessual.getDocumento().add(tpDocumento);
+   	    		List<TipoDocumento> documento = manifestaaoProcessual.getDocumento();
+				documento.add(tpDocumento);
 	   	    	    	
   	    		TipoAssuntoProcessual tpAssuntoProcessual = new TipoAssuntoProcessual();
    	    		Integer codigoNacional = processo.getAssunto_processual_codigo_nacional();
@@ -256,7 +256,6 @@ public class ClientPjeService {
        	   	    	TipoDocumento tpDocumentoProcessoVinculado = new TipoDocumento();
        	    		String conteudoDocumentoProcessoVinculado = processoVinculado.getConteudo_documento();
        	    		if (conteudoDocumentoProcessoVinculado!=null) {
-//       	    			ByteArrayDataSource ds = new ByteArrayDataSource(conteudoDocumento.getBytes(),"text/plain");
        	    			tpDocumentoProcessoVinculado.setConteudo(conteudoDocumentoProcessoVinculado);
        	    		}	
        	    		idDoc++;
@@ -292,8 +291,9 @@ public class ClientPjeService {
         			if (dataAssinaturaProcessoVinculado!=null) {
         				tpAssinaturaProcessoVinculado.setDataAssinatura(dataAssinaturaProcessoVinculado);
         			}	
-        			tpDocumentoProcessoVinculado.getAssinatura().add(tpAssinaturaProcessoVinculado);
-       	    		manifestaaoProcessual.getDocumento().add(tpDocumentoProcessoVinculado);
+        			List<TipoAssinatura> assinatura2 = tpDocumentoProcessoVinculado.getAssinatura();
+					assinatura2.add(tpAssinaturaProcessoVinculado);
+       	    		documento.add(tpDocumentoProcessoVinculado);
 
     				// Polo
     				TipoPoloProcessual poloVinculado = new TipoPoloProcessual();
@@ -415,7 +415,6 @@ public class ClientPjeService {
 	    	    			manifestaaoProcessual.getParametros().add(tp5);
 	        			}	
         			}
-    				//parteProcessoViculado.getAdvogado().add(advProcessoViculado);
 
        	   			if (!nomeParteReferencia.equals(pessoaProcessoVinculado.getNome())) {
        	   				poloVinculado.getParte().add(parteProcessoViculado);
@@ -444,7 +443,6 @@ public class ClientPjeService {
     			}	
     			TipoParametro tp3 = new TipoParametro();
     			tp3.setNome("mni:pje:identificadorExterno");
-    			//202000000001
     			tp3.setValor(new SimpleDateFormat("yyyyMM").format(Timestamp.valueOf(now)) + String.format("%06d", processo.getId()));
     			manifestaaoProcessual.getParametros().add(tp3);
     			
