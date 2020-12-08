@@ -460,6 +460,14 @@ public class ClientPjeService {
 					if (sucesso) {
 						processo.setEntra_status_processamento("01");
 					} else {
+						String mensageRetornada = entregarManifestacaoProcessual.getMensagem();
+						if (mensageRetornada!=null) {
+							int indexOf = mensageRetornada.indexOf("Número do processo: ");
+							if (indexOf>-1 && mensageRetornada.length()> (indexOf+46)) {
+								processo.setRetorno_protocolo_recebimento(
+										mensageRetornada.substring(indexOf+20,indexOf+46));
+							}
+						}
 						processo.setEntra_status_processamento("03");
 					}
 	   	    	    processo.setSai_data_atualizacao_registro(new SimpleDateFormat("yyyyMMddHHmmss").format(Timestamp.valueOf(now)));
