@@ -399,7 +399,6 @@ public class ClientPjeService {
     				
     				// Parametros
         			if (!processoVinculado.getTipo_documento().equals("58") ) {
-
 	    				TipoParametro tp4 = new TipoParametro();
 	        			String numeroCda = processoVinculado.getNumeroCda();
 	        			if (numeroCda != null) {
@@ -407,6 +406,7 @@ public class ClientPjeService {
 	    	    			tp4.setValor(numeroCda);
 	    	    			manifestaaoProcessual.getParametros().add(tp4);
 	        			}	
+        			} else {	
 	        			TipoParametro tp5 = new TipoParametro();
 	        			String dataConstituicaoCredito = processoVinculado.getDataConstituicaoCredito();
 	        			if (dataConstituicaoCredito!=null) {
@@ -433,6 +433,7 @@ public class ClientPjeService {
 		    			tp1.setValor(numeroCda);
 		    			manifestaaoProcessual.getParametros().add(tp1);
 	    			}	
+    			} else {
 	    			TipoParametro tp2 = new TipoParametro();
 	    			String dataConstituicaoCredito = processo.getDataConstituicaoCredito();
 	    			if (dataConstituicaoCredito!=null) {
@@ -440,7 +441,7 @@ public class ClientPjeService {
 		    			tp2.setValor(dataConstituicaoCredito);
 		    			manifestaaoProcessual.getParametros().add(tp2);
 	    			}	
-    			}	
+    			}
     			TipoParametro tp3 = new TipoParametro();
     			tp3.setNome("mni:pje:identificadorExterno");
     			tp3.setValor(new SimpleDateFormat("yyyyMM").format(Timestamp.valueOf(now)) + String.format("%06d", processo.getId()));
