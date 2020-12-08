@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.edza.cjus</groupId>
 	<artifactId>integraedzatjba</artifactId>
-	<version>0.3.19</version>
+	<version>0.3.20</version>
 	<name>integratjba</name>
 	<description>integratjba</description>
 
